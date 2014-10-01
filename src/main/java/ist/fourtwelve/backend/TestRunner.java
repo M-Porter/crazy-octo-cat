@@ -23,10 +23,11 @@ public class TestRunner
     private String inputFileName;
     private String outputFileName;
     private int success;
-/*
-Main Constructor, Set up of the initial info for running java, not compiling
-@args info object which holds all the information relating to paths and such for the program to run.
- */
+    /*
+    Main Constructor, Set up of the initial info for running java, not compiling
+    @args info object which holds all the information relating to paths and such for the program to run.
+    //TODO: Cleanup name, number handle? Own object which handles this as per student or professor or class? RunInfo with this info as well.
+     */
     public TestRunner(RunInfo info)
     {
         number = info.runNumber;
@@ -96,7 +97,6 @@ Main Constructor, Set up of the initial info for running java, not compiling
                     writeTests.close();
                     File inputFile = new File(inputFileName);
 //        create new java ProcessBuilder using arg ArrayList
-                    //TODO Ability to change the arguments via file or otherwise.
                     //"java", "-cp", classPath+"/"+name, "ArrayLoops"
                     ProcessBuilder pb = new ProcessBuilder(arg);
 //        redirect standard input, error, and output files; print process arguments
@@ -118,8 +118,8 @@ Main Constructor, Set up of the initial info for running java, not compiling
                 return;
             }
         }
-        catch(IllegalThreadStateException itse){}
-        catch(NoSuchElementException nsee)
+        catch(java.lang.IllegalThreadStateException itse){}
+        catch(java.util.NoSuchElementException nsee)
         {
             System.out.println("java.util.NoSuchElementException: Probably Scanner error");
         }
@@ -133,10 +133,11 @@ Main Constructor, Set up of the initial info for running java, not compiling
             System.out.println("Runtime InterruptedException");
         }
 
-    catch(Exception e)
-    {
-      System.out.println("General Runtime Exception");
-    }
+        catch(Exception e)
+        {
+            System.out.println("General Runtime Exception");
+        }
 
     }
+    //TODO: NEW ACCESS MODIFIERS ALSO METHODS TO GET THE INFORMATION??
 }
