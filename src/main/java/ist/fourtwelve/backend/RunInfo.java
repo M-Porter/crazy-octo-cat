@@ -14,13 +14,15 @@ import java.util.Scanner;
  */
 public class RunInfo {
     //Basic information; Defaults to this info if object is created without args.
+
+    //TODO: ACCESS MODIFIERS? NOT TALKING POINT ABOUT THE PROJECT ITSELF. NEED TO CHANGE COMPILER/TESTRUNNER TO USE METHODS NOT ATTRIBUTE ASSIGNMENT.
     String studentName = "blank";
     String studentHandle = "000000";
     String className = "297D/";
     String configFileName = "./configBatch.txt";
-    String path = "C:/Program Files/Java/jdk1.7.0_25/bin";
+    String path = System.getProperty("java.class.path");
     String sourcePath = "./studentFiles";
-    String testDataPath = sourcePath;
+    String testDataPath = sourcePath; //needed?
     String argsFileName = testDataPath + "/args.txt";
     String testInputFileName = testDataPath + "/TestInput.txt";
     // Compiler information
@@ -32,7 +34,7 @@ public class RunInfo {
     int studentNumber = 0;
     int runNumber = 1;
     /*
-    Basic constructor, Assumes nothing special and is used for testing purposes.
+    Basic constructor, Assumes nothing special and is used for testing purposes. Defaults to above.
      */
     public RunInfo (){
 
@@ -49,17 +51,24 @@ public class RunInfo {
     @param aFileName arguments file name for a mainly used arguments for the project.
     @param testInputFileName Where the test input is found.
     */
-    public RunInfo (String sName,String sHandle,String cName,String cFileName,String path,String sPath,String tDataPath,String aFileName,String tInputFileName){
+    public RunInfo (String sName,String sHandle,String cName,String cFileName,String sPath,String aFileName,String tInputFileName){
         this.studentName = sName;
         this.studentHandle = sHandle;
         this.className = cName;
         this.configFileName = cFileName;
-        this.path = path;
         this.sourcePath = sPath;
+        //Does not assume the above configuration. Removal from arguments? Setup similar as above?
         this.argsFileName = aFileName;
         this.testInputFileName = tInputFileName;
+        this.testDataPath = sourcePath; //needed?
     }//RunInfo(args)
+    /*
+        Setup of the batch configuration, Also runs compiler so to allow a list of arguments to be input via file.
 
+        Only will work with a set of files.
+
+        TODO: Integrate Unzipper for this project. Both Batch and Single.
+     */
     public void batchSetup(){
         try
         {
@@ -90,14 +99,10 @@ public class RunInfo {
 
 //TODO: COMPILER NEEDS TO BE CALLED HERE BATCH IS SPECIAL, AS THE COMPILE RUNS THEN HAS ANOTHER LINE INPUT.
 
-
-
             }//while:hasNextLine
         }catch(IOException ioe){
             System.out.println("Batch IO Exception");
         }
-
-
 //This ends the prep for the object to be sent to the compiler and test runner.
     }//batchSetup
     /*
@@ -108,19 +113,23 @@ public class RunInfo {
 // Setup names for compiler
         classPath = sourcePath + "/bin"; //changed new setup of directories
         studentPath = sourcePath + "/projectFiles"; // /studentFiles/projectFiles
-        inputFileStub = studentPath + "/input";
-        outputFileName = studentPath + "/output-" + studentName + ".txt";
-// Debug
-/*    make sure set correctly
-        System.out.println("classPath: " + classPath);
-        System.out.println("studentPath: " + studentPath);
-        System.out.println("inputFileStub: " + inputFileStub);
-        System.out.println("outputFileName: " + outputFileName);
-*/
+        inputFileStub = studentPath + "/input"; // /studentFiles/projectFiles/input
+        outputFileName = studentPath + "/output-" + studentName + ".txt"; // /studentFiles/projectFiles/output-'blank'.txt
 //This ends the prep for the object to be sent to the compiler and test runner.
     }//singleSetup()
-
-//TODO: Add methods and setup access modifiers.
-
-
+    //TODO: Remove or add missing modifying methods.
+    public String getStudentName(){return studentName;}
+    public String getStudentNameHandleName(){return studentHandle;}
+    public String getClassName(){return className;}
+    public String getConfigFileName(){return configFileName;}
+    public String getSourcePath(){return sourcePath;}
+    public String getArgsFileName(){return argsFileName;}
+    public String getTestInputFileName(){return testInputFileName;}
+    public void setStudentName(String x){this.studentName = x;}
+    public void setStudentHandle(String x){this.studentHandle = x;}
+    public void setClassName(String x){this.className = x;}
+    public void setConfigFileName(String x){this.configFileName = x;}
+    public void setSourcePath(String x){this.sourcePath = x;}
+    public void setArgsFileName(String x){this.argsFileName = x;}
+    public void setTestInputFileName(String x){this.testInputFileName = x;}
 }//RunInfo
