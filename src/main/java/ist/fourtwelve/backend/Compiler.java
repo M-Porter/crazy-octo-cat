@@ -17,7 +17,11 @@ public class Compiler {
     private String studentPath;
     private String outputFileName;
     private int success;
-
+    private String zipFile;
+    /*
+    Constructor, needs a RunInfo object to initialize this object.
+    @param info current information about the compile.
+     */
     public Compiler(RunInfo info) {
         name = info.studentName;
         handle = info.studentHandle;
@@ -26,14 +30,22 @@ public class Compiler {
         sourcePath = info.sourcePath;
         studentPath = info.studentPath;
         outputFileName = info.outputFileName;
+        zipFile = info.zipFile;
         success = 1;  // Outcome of compilation, success = 0
     }
     public int compileJava(){
         try {
-            //TODO Test the directory creation below
-            String tempName = "/" + name;
+            String tempName = "/" + name; //Maybe this should be changed elsewhere?
             boolean createStudentBinName = new File(classPath+tempName).mkdirs(); //studentFiles/bin/@name
             boolean createStudentProjectName = new File(studentPath+tempName).mkdirs(); //studentFiles/projectFiles/@name
+            /*
+            Unzips the students work, into similar directories, Deletes work already in the directory.
+            //TODO: Talk about unzipper working with the output directory. Use Mudgett's TestTools?
+             */
+            //Unzipper zip = new Unzipper(zipFile,studentPath+tempName);
+            //zip.decompress();
+
+
             ProcessBuilder pb = new ProcessBuilder("javac", "-d", classPath+tempName, studentPath+tempName + "/*.java"); //THIS ASSUMES PATHS ARE RIGHT
             System.out.println(pb.command().toString()); //Debug
             //    set up output file
@@ -43,14 +55,13 @@ public class Compiler {
             outputFile.delete();
             pb.redirectErrorStream(true);
             pb.redirectOutput(Redirect.appendTo(outputFile));
-//TODO: HAVE THE ABILITY FOR THIS STUFF TO BE CHANGED IN SOME MANNER, IE WHAT IS BEING RUN VIA METHODS OR NOT. THIS PROBABLY ISNT BACKEND'S PROBLEM IF METHODS ARE HERE.
+//TODO: Most of the information needs to be changed, but already this can be changed via runInfo,
             //    start javac process
             Process p = pb.start();
             //    need other processes to wait for compilation to finish
             //    basically joins the thread to the javac process to force sequential
             //    execution - need to be careful - if any process hangs, whole run hangs
             success = p.waitFor(); //Returns anything else but 1 if it doesn't run.
-
             assert pb.redirectInput() == Redirect.PIPE;
             assert pb.redirectOutput().file() == outputFile;
             assert p.getInputStream().read() == -1;

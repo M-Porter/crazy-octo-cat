@@ -15,7 +15,8 @@ import java.util.Scanner;
 public class RunInfo {
     //Basic information; Defaults to this info if object is created without args.
 
-    //TODO: ACCESS MODIFIERS? NOT TALKING POINT ABOUT THE PROJECT ITSELF. NEED TO CHANGE COMPILER/TESTRUNNER TO USE METHODS NOT ATTRIBUTE ASSIGNMENT.
+    //TODO: Should these be private @attributes of run info.
+    //TODO: Student/Class/Professor thing relating to what GUI was working with?
     String studentName = "blank";
     String studentHandle = "000000";
     String className = "297D/";
@@ -25,6 +26,7 @@ public class RunInfo {
     String testDataPath = sourcePath; //needed?
     String argsFileName = testDataPath + "/args.txt";
     String testInputFileName = testDataPath + "/TestInput.txt";
+    String zipFile = studentName + ".zip";
     // Compiler information
     String classPath;
     String studentPath;
@@ -63,9 +65,6 @@ public class RunInfo {
         this.testDataPath = sourcePath; //needed?
     }//RunInfo(args)
     /*
-        Setup of the batch configuration, Also runs compiler so to allow a list of arguments to be input via file.
-
-        Only will work with a set of files.
 
         TODO: Integrate Unzipper for this project. Both Batch and Single.
      */
@@ -90,15 +89,23 @@ public class RunInfo {
                     studentName = inLine.next();
                     studentHandle = inLine.next();
                 }
-
+//TODO: Incorporate/talk about the Student Handle, Professor, Class, Section and how this can change the directories that are created.
 //          set paths and file names:
                 String classPath = "/java/bin/" + className + studentName;
                 String studentPath = sourcePath + "/" + studentName;
                 String inputFileStub = studentPath + "/input";
                 String outputFileName = studentPath + "/output-" + studentName + ".txt";
-
-//TODO: COMPILER NEEDS TO BE CALLED HERE BATCH IS SPECIAL, AS THE COMPILE RUNS THEN HAS ANOTHER LINE INPUT.
-
+                this.zipFile = studentPath + "/" + studentName + "/" + studentName + ".zip"; // zip setup
+//TODO: Reconfigure how batch is setup. Old method implemented, untested. Incorporate the class into this one?
+                Compiler c = new Compiler(this);
+                int success = c.compileJava();
+//	    Print whether or not compile successful
+                if(success == 0){System.out.println("Compiled Successfully");}
+                else{ System.out.println("Compile Failed"); }
+                TestRunner r = new TestRunner(this);
+                r.runJava();
+                runNumber++;
+                System.out.println("Moving on to Run Number" + runNumber);
             }//while:hasNextLine
         }catch(IOException ioe){
             System.out.println("Batch IO Exception");
@@ -115,6 +122,8 @@ public class RunInfo {
         studentPath = sourcePath + "/projectFiles"; // /studentFiles/projectFiles
         inputFileStub = studentPath + "/input"; // /studentFiles/projectFiles/input
         outputFileName = studentPath + "/output-" + studentName + ".txt"; // /studentFiles/projectFiles/output-'blank'.txt
+        this.zipFile = studentPath + "/" + studentName + "/" + studentName + ".zip"; // zip setup
+        System.out.println(zipFile);
 //This ends the prep for the object to be sent to the compiler and test runner.
     }//singleSetup()
     //TODO: Remove or add missing modifying methods.
@@ -125,6 +134,7 @@ public class RunInfo {
     public String getSourcePath(){return sourcePath;}
     public String getArgsFileName(){return argsFileName;}
     public String getTestInputFileName(){return testInputFileName;}
+    public String getZipFile(){return zipFile;}
     public void setStudentName(String x){this.studentName = x;}
     public void setStudentHandle(String x){this.studentHandle = x;}
     public void setClassName(String x){this.className = x;}
@@ -132,4 +142,5 @@ public class RunInfo {
     public void setSourcePath(String x){this.sourcePath = x;}
     public void setArgsFileName(String x){this.argsFileName = x;}
     public void setTestInputFileName(String x){this.testInputFileName = x;}
+    public void setZipFile (String x){this.zipFile = x;}
 }//RunInfo
