@@ -8,6 +8,7 @@ import java.util.*;
 import java.lang.ProcessBuilder.Redirect;
 
 public class Compiler {
+
     private int number;
     private String name;
     private String handle;
@@ -18,6 +19,7 @@ public class Compiler {
     private String outputFileName;
     private int success;
     private String zipFile;
+
     /*
     Constructor, needs a RunInfo object to initialize this object.
     @param info current information about the compile.
