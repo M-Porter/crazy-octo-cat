@@ -52,6 +52,7 @@ public class ClassCheckerTest {
 
     }
 
+    /* Couldn't get to run without error 
     @After
     
     public void cleanUp() {
@@ -61,8 +62,8 @@ public class ClassCheckerTest {
     unzipper.delete(new File("SecondTest.java"));
     // delete downloaded zip
     // unzipper.delete(new File("2014-09-24.zip"));
-}
     }
+    }*/
 
     @Test
     public void testCheckForUsages() throws Exception {
