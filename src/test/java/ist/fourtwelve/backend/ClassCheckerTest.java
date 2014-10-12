@@ -53,8 +53,13 @@ public class ClassCheckerTest {
     }
 
     @After
-    public void tearDown() throws Exception {
-
+    
+    public void cleanUp() {
+    // delete extracted directory
+    unzipper.delete(new File("2014-09-24"));
+    // delete downloaded zip
+    // unzipper.delete(new File("2014-09-24.zip"));
+}
     }
 
     @Test
