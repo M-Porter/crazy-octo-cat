@@ -20,7 +20,7 @@ public class ClassCheckerTest {
 
     private ArrayList<File> files = new ArrayList<File>();
     private ArrayList<String> params = new ArrayList<String>();
-
+    private Unzipper unzipper;
     @Before
     public void setUp() throws Exception {
         try {
@@ -56,7 +56,9 @@ public class ClassCheckerTest {
     
     public void cleanUp() {
     // delete extracted directory
-    unzipper.delete(new File("2014-09-24"));
+    unzipper.delete(new File("HelloWorld.java"));
+    unzipper.delete(new File("FirstTest.java"));
+    unzipper.delete(new File("SecondTest.java"));
     // delete downloaded zip
     // unzipper.delete(new File("2014-09-24.zip"));
 }
