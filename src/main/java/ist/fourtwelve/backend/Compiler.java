@@ -31,31 +31,32 @@ public class Compiler {
         name = info.studentName;
         handle = info.studentHandle;
         path = info.path;
-        classPath = info.classPath;
+        classPath = info.classPath + "/" + name;
         sourcePath = info.sourcePath;
-        studentPath = info.studentPath;
+        studentPath = info.studentPath + "/" + name;
         outputFileName = info.outputFileName;
         zipFile = info.zipFile;
         success = 1;  // Outcome of compilation, success = 0
     }
     public int compileJava(){
         try {
-            compileJavaMethodToString = "";
+            // Makes some directories for compiling
             String tempName = "/" + name; //Maybe this should be changed elsewhere?
-            compileJavaMethodToString += "tempName is " + tempName + "\n";
-            boolean createStudentBinName = new File(classPath+tempName).mkdirs(); //studentFiles/bin/@name
+            boolean createStudentBinName = new File(classPath).mkdirs(); //studentFiles/bin/@name
+            boolean createStudentProjectName = new File(studentPath).mkdirs(); //studentFiles/projectFiles/@name
+
+            compileJavaMethodToString = "";
             compileJavaMethodToString += "createStudentBinName is " + createStudentBinName + "\n";
-            boolean createStudentProjectName = new File(studentPath+tempName).mkdirs(); //studentFiles/projectFiles/@name
             compileJavaMethodToString += "createStudentProjectName is " + createStudentProjectName + "\n";
             /*
             Unzips the students work, into similar directories, Deletes work already in the directory.
-            //TODO: Talk about unzipper working with the output directory. Use Mudgett's TestTools?
+            //TODO: The zip file gotta be the way we want it. and match the above file directories.
              */
-            //Unzipper zip = new Unzipper(zipFile,studentPath+tempName);
+            //Unzipper zip = new Unzipper(zipFile);
             //zip.decompress();
 
 
-            ProcessBuilder pb = new ProcessBuilder("javac", "-d", classPath+tempName, studentPath+tempName + "/*.java"); //THIS ASSUMES PATHS ARE RIGHT
+            ProcessBuilder pb = new ProcessBuilder("javac", "-d", classPath, studentPath + "/*.java"); //THIS ASSUMES PATHS ARE RIGHT
             System.out.println(pb.command().toString()); //Debug
             compileJavaMethodToString += "pb.command() is " + pb.command().toString() + "\n";
             //    set up output file
@@ -116,6 +117,13 @@ public class Compiler {
             e.printStackTrace();
         }
     }
+
+    public void setDirectories(String binDir, String projectDir){
+        classPath = binDir;
+        studentPath = projectDir;
+}
+
+
     //TODO Access modifying methods?? Needed or not?
     public String toString(){ return varToString;}
     public String compileJavaMethodToString(){ return compileJavaMethodToString;}

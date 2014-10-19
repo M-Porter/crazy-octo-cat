@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.*;
 import java.lang.ProcessBuilder.Redirect;
 
-public class TestRunner
+public class RunJava
 {
     private int number;
     private String name;
@@ -31,7 +31,7 @@ public class TestRunner
     @args info object which holds all the information relating to paths and such for the program to run.
     //TODO: Cleanup name, number handle? Own object which handles this as per student or professor or class? RunInfo with this info as well.
      */
-    public TestRunner(RunInfo info)
+    public RunJava(RunInfo info)
     {
         number = info.runNumber;
         name = info.studentName;

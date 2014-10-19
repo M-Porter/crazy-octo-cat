@@ -46,7 +46,7 @@ public class RunInfo {
     @param sName Student Name for the specific directory
     @param sHandle Student Handle for grading purposes, otherwise unused atm
     @param cName Classname, Unused atm, but will be used to setup an additional directory to separate classes from each other.
-    @param cFileName ConfigFileName, Where the configuration file is found for TestRunner.
+    @param cFileName ConfigFileName, Where the configuration file is found for RunJava.
     @param path Path to the java directory, unused?
     @param sPath SourcePath the first layer directory of where student files are found.
     @param tDataPath Used in test runner for proper data
@@ -102,7 +102,7 @@ public class RunInfo {
 //	    Print whether or not compile successful
                 if(success == 0){System.out.println("Compiled Successfully");}
                 else{ System.out.println("Compile Failed"); }
-                TestRunner r = new TestRunner(this);
+                RunJava r = new RunJava(this);
                 r.runJava();
                 runNumber++;
                 System.out.println("Moving on to Run Number" + runNumber);
