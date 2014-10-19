@@ -30,7 +30,7 @@ public class Unzipper {
         this.argFile = zipFile;
         this.outputDir = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     }
-
+    public Unzipper(){}
     /**
      * Constructor to allow for a custom output directory.
      * @param zipFile
