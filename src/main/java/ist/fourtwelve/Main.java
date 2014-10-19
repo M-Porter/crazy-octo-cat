@@ -3,7 +3,9 @@ package ist.fourtwelve;
 import ist.fourtwelve.backend.RunInfo;
 import ist.fourtwelve.backend.TestRunner;
 import ist.fourtwelve.backend.Compiler;
+import ist.fourtwelve.backend.Unzipper;
 
+import java.io.IOException;
 import java.lang.*;
 
 /**
@@ -33,7 +35,6 @@ public class Main {
         TestRunner r = new TestRunner(testInfo);
         r.runJava();
         //testInfo.runNumber++;
-
     }
 
 }

@@ -19,6 +19,9 @@ public class Compiler {
     private String outputFileName;
     private int success;
     private String zipFile;
+    //Debug/Output
+    private String varToString;
+    private String compileJavaMethodToString;
 
     /*
     Constructor, needs a RunInfo object to initialize this object.
@@ -37,9 +40,13 @@ public class Compiler {
     }
     public int compileJava(){
         try {
+            compileJavaMethodToString = "";
             String tempName = "/" + name; //Maybe this should be changed elsewhere?
+            compileJavaMethodToString += "tempName is " + tempName + "\n";
             boolean createStudentBinName = new File(classPath+tempName).mkdirs(); //studentFiles/bin/@name
+            compileJavaMethodToString += "createStudentBinName is " + createStudentBinName + "\n";
             boolean createStudentProjectName = new File(studentPath+tempName).mkdirs(); //studentFiles/projectFiles/@name
+            compileJavaMethodToString += "createStudentProjectName is " + createStudentProjectName + "\n";
             /*
             Unzips the students work, into similar directories, Deletes work already in the directory.
             //TODO: Talk about unzipper working with the output directory. Use Mudgett's TestTools?
@@ -50,20 +57,25 @@ public class Compiler {
 
             ProcessBuilder pb = new ProcessBuilder("javac", "-d", classPath+tempName, studentPath+tempName + "/*.java"); //THIS ASSUMES PATHS ARE RIGHT
             System.out.println(pb.command().toString()); //Debug
+            compileJavaMethodToString += "pb.command() is " + pb.command().toString() + "\n";
             //    set up output file
             File outputFile = new File(outputFileName);
             //    System.out.println(outputFileName);
             //Not sure what the delete thing does. Clears the file? Makes sure the path is correct?
             outputFile.delete();
             pb.redirectErrorStream(true);
+            compileJavaMethodToString += "redirectErrorStream is " + true + "\n";
             pb.redirectOutput(Redirect.appendTo(outputFile));
+            compileJavaMethodToString += "pb.redirectOutput(Redirect.appendTo(outputFile)) has run \n";
 //TODO: Most of the information needs to be changed, but already this can be changed via runInfo,
             //    start javac process
             Process p = pb.start();
+            compileJavaMethodToString += "pb.start() has run \n";
             //    need other processes to wait for compilation to finish
             //    basically joins the thread to the javac process to force sequential
             //    execution - need to be careful - if any process hangs, whole run hangs
             success = p.waitFor(); //Returns anything else but 1 if it doesn't run.
+            compileJavaMethodToString += "success is " + success + "\n";
             assert pb.redirectInput() == Redirect.PIPE;
             assert pb.redirectOutput().file() == outputFile;
             assert p.getInputStream().read() == -1;
@@ -105,4 +117,6 @@ public class Compiler {
         }
     }
     //TODO Access modifying methods?? Needed or not?
+    public String toString(){ return varToString;}
+    public String compileJavaMethodToString(){ return compileJavaMethodToString;}
 }

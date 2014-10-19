@@ -19,6 +19,7 @@ public class Unzipper {
 
     private String argFile;
     private String outputDir;
+    private String varToString;
 
     /**
      * Preferred constructor for project.
@@ -39,6 +40,7 @@ public class Unzipper {
     public Unzipper(String zipFile, String outputDir) throws IOException {
         this.argFile = zipFile;
         this.outputDir = outputDir;
+        varToString = "argFile is " + zipFile + "\n" + "outputDir is " + outputDir + "\n";
     }
 
     /**
@@ -55,11 +57,15 @@ public class Unzipper {
             ZipEntry zipEntry = (ZipEntry) enu.nextElement();
 
             String name = zipEntry.getName();
+
             long size = zipEntry.getSize();
             long compressedSize = zipEntry.getCompressedSize();
+
             if(!name.contains("__MACOSX")) {
                 System.out.printf("name: %-32s | size: %6d | compressed size: %6d\n",
                         name, size, compressedSize);
+                varToString += "name: " + name + " | size: " + size + " | compressed size: " + compressedSize + "\n";
+                //System.out.println("varToString is \n" + varToString);
             }
 
             File file = new File(name);
@@ -75,7 +81,7 @@ public class Unzipper {
 
             while ((length = is.read(bytes)) >= 0) {
                 fos.write(bytes, 0, length);
-            }
+        }
 
             is.close();
             fos.close();
@@ -105,6 +111,10 @@ public class Unzipper {
         if(!f.delete()) {
             System.out.println("Failed to delete " + f);
         }
+    }
+    public String toString()
+    {
+        return varToString;
     }
 
 }
