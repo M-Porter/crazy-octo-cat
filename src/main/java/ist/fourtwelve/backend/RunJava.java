@@ -23,6 +23,7 @@ public class RunJava
     private String inputFileName;
     private String outputFileName;
     private int success;
+    private RunInfo info;
     //Debug/Ouput
     private String varToString;
     private String runJavaMethodToString;
@@ -46,7 +47,7 @@ public class RunJava
         inputFileStub = info.inputFileStub;
         outputFileName = info.outputFileName;
         success = 1;  // Outcome of compilation, success = 0
-
+        this.info = info;
 
     }
     public void runJava()
@@ -80,6 +81,7 @@ public class RunJava
                     List<String> arg = new ArrayList<String>();
                     String argsLine = argsInput.nextLine();
 //        parse argsLine via TestTools.parseLine
+
                     arg = TestTools.parseLine(argsLine);
                     runJavaMethodToString += "arg is " + arg.toString() + "\n";
                     arg.add(0, "java");
@@ -97,25 +99,27 @@ public class RunJava
 
 //        create input file for current run
                     List<String> inputs = new ArrayList<String>();
-                    inputs = TestTools.parseLine(testInputLine);
+                    inputs = info.getArgs();
+
+                    //inputs = TestTools.parseLine(testInputLine);
                     runJavaMethodToString += "inputs is " + inputs.toString() + "\n";
                     System.out.println("System.in inputs: " + inputs);
-                    inputFileName = inputFileStub + run + ".txt";
+                    //inputFileName = inputFileStub + run + ".txt";
                     runJavaMethodToString += "inputFileName is " + inputFileName.toString() + "\n";
-                    PrintWriter writeTests = new PrintWriter(inputFileName);
+                    /*PrintWriter writeTests = new PrintWriter(inputFileName);
                     runJavaMethodToString += "writeTests is " + writeTests.toString() + "\n";
                     for(String element : inputs)
                     {
                         writeTests.println(element);
                     }
-                    writeTests.close();
-                    File inputFile = new File(inputFileName);
+                    writeTests.close();*/
+                    //File inputFile = new File(inputFileName);
 //        create new java ProcessBuilder using arg ArrayList
                     //"java", "-cp", classPath+"/"+name, "ArrayLoops"
                     ProcessBuilder pb = new ProcessBuilder(arg);
                     runJavaMethodToString += "pb.command() is " + pb.command().toString() + "\n";
 //        redirect standard input, error, and output files; print process arguments
-                    pb.redirectInput(Redirect.from(inputFile));
+                    //pb.redirectInput(Redirect.from(inputFile));
                     pb.redirectErrorStream(true);
                     pb.redirectOutput(Redirect.appendTo(outputFile));
                     runJavaMethodToString += "pb.command() is " + pb.command().toString() + "\n";

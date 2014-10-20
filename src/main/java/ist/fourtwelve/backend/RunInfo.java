@@ -4,6 +4,7 @@ package ist.fourtwelve.backend;
  * Created by Steven on 9/28/2014.
  */
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -32,6 +33,7 @@ public class RunInfo {
     String studentPath;
     String inputFileStub;
     String outputFileName;
+    ArrayList<String> args;
     //Batch/Single info
     int studentNumber = 0;
     int runNumber = 1;
@@ -135,6 +137,12 @@ public class RunInfo {
     public String getArgsFileName(){return argsFileName;}
     public String getTestInputFileName(){return testInputFileName;}
     public String getZipFile(){return zipFile;}
+    public String getClassPath(){return classPath;}
+    public String getStudentPath(){return studentPath;}
+    public ArrayList<String> getArgs(){return args;}
+    public void setArgs(ArrayList<String> x){this.args = x;}
+    public void setClassPath(String x){this.classPath = x + "/bin";} // You give it the src path
+    public void setStudentPath(String x){this.studentPath = x + "/projectFiles" ;} // You give it the src path
     public void setStudentName(String x){this.studentName = x;}
     public void setStudentHandle(String x){this.studentHandle = x;}
     public void setClassName(String x){this.className = x;}

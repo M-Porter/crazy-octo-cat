@@ -48,7 +48,41 @@ public class Setup {
     Compiles then runs the project
      */
     public void compileRunProject(){
+        //For each project....
+        for(int i = 0; i > projects.size(); i++) {
+            Project temp = projects.get(i);
+                //For each test Run....
+                for(int j = 0; j > temp.getTestRuns().size(); j++){
+                    //Setup of the paths
+                    info.setStudentPath(temp.getSrcDir());
+                    info.setClassPath(temp.getSrcDir());
+                    //Setup of run arguments
+                    info.setArgs(temp.getTestRuns().get(j).getInputs());
+                    if(temp.getTestRuns().size() > 1){
+                        //TODO: If there are more args for the file? Not sure what to do here.
+                    }
+                    System.out.println("Path where the files should be located is... also unzipped to" + info.getStudentPath());
+                    //TODO: Unzip some stuff
+                    //TODO: Set the class path (where stuff compiles
+                    //TODO: Add in a way to put test arguments not from the text file
+                    //TODO: Make runner arguments available as attributes of the RunJava class.
+                    //TODO: Look at how to extra arguments or generate some bs arguments for
+                    //TODO: Change the way RunJava handles the arguments. Should be something from the simple test case.
 
+                    //Synchronized is probably not needed, but could work?
+                    synchronized (compiler) {
+                        compiler = new Compiler(info);
+                        compiler.compileJava();
+                    }
+                    synchronized (runner) {
+                        runner = new RunJava(info);
+                        runner.runJava();
+                    }
+
+
+                }
+
+        }
     }
     /*
     Runs multiple projects without compiling.
