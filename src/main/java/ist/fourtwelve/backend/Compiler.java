@@ -121,10 +121,10 @@ public class Compiler {
     public void setDirectories(String binDir, String projectDir){
         classPath = binDir;
         studentPath = projectDir;
-}
-
-
+    }
     //TODO Access modifying methods?? Needed or not?
+    public void setClassPath(String classPath){this.classPath = classPath;}
+    public void setStudentPath(String studentPath){this.studentPath = studentPath;}
     public String toString(){ return varToString;}
     public String compileJavaMethodToString(){ return compileJavaMethodToString;}
 }

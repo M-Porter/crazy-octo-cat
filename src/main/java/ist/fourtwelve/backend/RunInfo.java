@@ -135,6 +135,10 @@ public class RunInfo {
     public String getArgsFileName(){return argsFileName;}
     public String getTestInputFileName(){return testInputFileName;}
     public String getZipFile(){return zipFile;}
+    public String getClassPath(){return classPath;}
+    public String getStudentPath(){return studentPath;}
+    public void setClassPath(String x){this.classPath = x + "/bin";} // You give it the src path
+    public void setStudentPath(String x){this.studentPath = x + "/projectFiles" ;} // You give it the src path
     public void setStudentName(String x){this.studentName = x;}
     public void setStudentHandle(String x){this.studentHandle = x;}
     public void setClassName(String x){this.className = x;}

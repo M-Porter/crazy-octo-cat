@@ -48,7 +48,31 @@ public class Setup {
     Compiles then runs the project
      */
     public void compileRunProject(){
+        for(int i = 0; i > projects.size(); i++) {
+            Project temp = projects.get(i);
 
+                for(int j = 0; j > temp.getTestRuns().size(); j++){
+                    info.setStudentPath(temp.getSrcDir());
+                    info.setClassPath(temp.getSrcDir());
+                    System.out.println("Path where the files should be located is... also unzipped to" + info.getStudentPath());
+                    //TODO: Unzip some stuff
+                    //TODO: Set the class path (where stuff compiles
+                    //TODO: Add in a way to put test arguments not from the text file
+                    //TODO: Make runner arguments available as attributes of the RunJava class.
+                    //TODO: Look at how to extra arguments or generate some bs arguments for
+                    synchronized (compiler) {
+                        compiler = new Compiler(info);
+                        compiler.compileJava();
+                    }
+                    synchronized (runner) {
+                        runner = new RunJava(info);
+                        runner.runJava();
+                    }
+
+
+                }
+
+        }
     }
     /*
     Runs multiple projects without compiling.

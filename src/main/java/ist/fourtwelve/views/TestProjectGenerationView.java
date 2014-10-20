@@ -6,6 +6,7 @@
 
 package ist.fourtwelve.views;
 
+import ist.fourtwelve.backend.Setup;
 import ist.fourtwelve.models.Project;
 import ist.fourtwelve.models.ProjectGenerator;
 import ist.fourtwelve.models.TestRun;
@@ -449,9 +450,9 @@ public class TestProjectGenerationView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_expectOutFieldActionPerformed
 
-    private void CompileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompileButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CompileButtonActionPerformed
+    private void CompileButtonActionPerformed(java.awt.event.ActionEvent evt) {
+       Setup s = new Setup(generator.getProjList());
+    }
 
     private void addProjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProjectButtonActionPerformed
         Project thisProject = new Project(projNameField.getText(),srcDirField.getText(),this.generator.getTestRunsList());

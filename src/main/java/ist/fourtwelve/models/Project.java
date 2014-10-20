@@ -14,31 +14,18 @@ import java.util.ArrayList;
 
 
 public class Project {
-// ** INSTANCE VARIABLES **
-    //** DESCRIPTORS
-    // Name of the project
     private String projectName;
-    
-    
-    //** INPUT
     //Source directory from which the project will be compiled
     private String srcDirPath;
-    
     //Contains the input params for each testrun && stores output/results
     private ArrayList<TestRun> testRuns;
-    
-    
-    //** STATUS
     //boolean indicating run success *(contains true if any one test compiles)*
     private boolean compileSuccess;
-
 // ** CONSTRUCTORS **
     public Project(String name, String srcPath, ArrayList<TestRun> tests){
         this.projectName    = name;
         this.srcDirPath     = srcPath;
         this.testRuns       = new ArrayList<TestRun>(tests);
-        
-        
     }
 // ** CORE METHODS **
     
@@ -76,10 +63,8 @@ public class Project {
     public void reportCompileSuccess(boolean result){
         this.compileSuccess = result;
     }
-    //retrieve success of failure of this run, did program crash?
-    public boolean getCompileSuccess(){
-        return this.compileSuccess;
-    }
+
+    public boolean getCompileSuccess(){return this.compileSuccess;}
     
     
     
