@@ -1,47 +1,89 @@
+/**
+ *      TODO:
+ */
+
 package ist.fourtwelve.models;
+
+import ist.fourtwelve.models.TestRun;
+
+import java.util.ArrayList;
+
+/**
+ * @author cmb5837 Christopher M. Baldwin
+ */
 
 
 public class Project {
-
+// ** INSTANCE VARIABLES **
+    //** DESCRIPTORS
     // Name of the project
     private String projectName;
-
-
-    //** May need a solution for team based projects **
-    //Pointer reference to associated student class
-    private Student student;
-
+    
+    
+    //** INPUT
     //Source directory from which the project will be compiled
     private String srcDirPath;
+    
+    //Contains the input params for each testrun && stores output/results
+    private ArrayList<TestRun> testRuns;
+    
+    
+    //** STATUS
+    //boolean indicating run success *(contains true if any one test compiles)*
+    private boolean compileSuccess;
 
-
-    //// random stringaklsjdfalj
-
-    //** NEED SOME WAY OF DOING THE FOLLOWING THINGS **
-    //Running a specific number of tests on a java program
-    //Passing accurate inputs to the back-end team for testing, per run
-    //checking whether each individual test compiled or failed to compile
-    //Either:
-    //Automatically testing to see if the correct output was generated
-    //Showing the instructor the output from all test runs
-    //Or Both
-    //Associating Each Project with the correct student for grading
-
-
-    //** ^^ Proposed Solution to above ^^ **
-    //make a class called 'run', and have an arraylist of runs
-    //each containing the above listed parameters
-
-
-    /*
-    private int numTestRuns;
-
-    //Results of the attempted run
-    //Did it compile?
-    private boolean compileSuccess = false;
-    //What was the output
-    private String  outputCapture;
-
-    */
-
+// ** CONSTRUCTORS **
+    public Project(String name, String srcPath, ArrayList<TestRun> tests){
+        this.projectName    = name;
+        this.srcDirPath     = srcPath;
+        this.testRuns       = new ArrayList<TestRun>(tests);
+        
+        
+    }
+// ** CORE METHODS **
+    
+// ** GETTERS AND SETTERS **
+    
+    //** DESCRIPTORS
+    //Store the name
+    public void setName(String name){
+        this.projectName = name;
+    }
+    //Get the name
+    public String getName(){
+        return this.projectName;
+    }
+    
+    //** INPUT
+    // set the file path where the project will be found
+    public void setSrcDir(String filepath){
+        this.srcDirPath = filepath;
+    }
+    // return the file path the project is currently pointing to
+    public String getSrcDir(){
+        return this.srcDirPath;
+    }
+    
+    public void setTestRuns(ArrayList<TestRun> testRuns){
+        this.testRuns = testRuns;
+    }
+    public ArrayList<TestRun> getTestRuns(){
+        return this.testRuns;
+    }
+    
+    //** STATUS
+    //Use to report whether the test was a success or failure
+    public void reportCompileSuccess(boolean result){
+        this.compileSuccess = result;
+    }
+    //retrieve success of failure of this run, did program crash?
+    public boolean getCompileSuccess(){
+        return this.compileSuccess;
+    }
+    
+    
+    
+    
+    
+    
 }

@@ -1,7 +1,13 @@
-package ist.fourtwelve.models;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
+package ist.fourtwelve.models;
 import java.util.ArrayList;
 
+//Author Tom Paz
 
 public class Student {
 
@@ -9,7 +15,7 @@ public class Student {
     private int studentID;
     private String firstName;
     private String lastName;
-    //Reference back to the course the student is a part of.
+    //Reference back to the course the student is a part of. 
     public Student(String fName, String lName, int ID, ArrayList<Project> projects){
         firstName = fName;
         lastName = lName;
@@ -22,7 +28,7 @@ public class Student {
         studentID = ID;
         theProjectList = new ArrayList();
     }
-
+    
     //Getters
     public String getFirstName(){
         return firstName;
@@ -36,5 +42,6 @@ public class Student {
     public ArrayList<Project> getStudentProject(){
         return theProjectList;
     }
-
+    
+    
 }
