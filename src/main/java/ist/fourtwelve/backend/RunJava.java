@@ -79,14 +79,13 @@ public class RunJava
             classes = info.getClassList();
             inputs = info.getArgs();
             int size = inputs.size();
-            //Object[] inputsx = inputs.toArray();
-            //String[] inputsString = (String[]) inputsx;
             synchronized(outputFile)
             {
                 while(i < size)
                 {
+                    inputs = info.getArgs();
                     run++;
-                    System.out.println(inputs.size());
+
 //        declare arg ArrayList for java ProcessBuilder
                     List<String> arg = new ArrayList<String>();
                     //String argsLine = argsInput.nextLine();
@@ -107,7 +106,7 @@ public class RunJava
                     String testInputLine = inputs.get(i);
                     //runJavaMethodToString += "testInputLine is " + testInputLine.toString() + "\n";
 //        System.out.println(testInputLine);
-                    System.out.println(inputs.size());
+                    //System.out.println(inputs.size());
 //        create input file for current run
 
                     //arg.add(inputs.get(i));
@@ -126,7 +125,6 @@ public class RunJava
                         writeTests.println(element);
                     }
                     writeTests.close();
-                    System.out.println(inputs.size());
                     File inputFile = new File(inputFileName);
 //        create new java ProcessBuilder using arg ArrayList
                     //"java", "-cp", classPath+"/"+name, "ArrayLoops"

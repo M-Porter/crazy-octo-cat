@@ -107,6 +107,8 @@ public class RunInfo {
     public ArrayList<String> getArgs(){return args;}
     public String getClassList(){return classList;}
     public String getOutputFileName(){return outputFileName;}
+    public String getInputFileStub(){return inputFileStub;}
+    public void setInputFileStub(String x){this.inputFileStub = x + "/input";}
     public void setArgs(ArrayList<String> x){this.args = x;}
     public void setClassList(String x){this.classList = x;}
     public void setClassPath(String x){this.classPath = x + "/bin";} // You give it the src path

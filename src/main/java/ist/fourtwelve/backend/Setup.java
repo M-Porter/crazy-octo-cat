@@ -65,11 +65,12 @@ public class Setup {
             info.setClassList(temp.getMainClassName());
             //For each test Run....
             for(int j = 0; j < temp.getTestRuns().size(); j++){
-                //Setup of the paths
+                //Setup RunInfo object.
                 info.setStudentPath(temp.getSrcDir());
                 info.setClassPath(temp.getSrcDir());
-                //Setup of run arguments-- This might be where the information isnt getting passed correctly.
-                info.setArgs(temp.getTestRuns().get(j).getInputs());
+                info.setArgs(temp.getTestRuns().get(j).getInputs());//Setup of run arguments-- This might be where the information isnt getting passed correctly.
+                info.setInputFileStub(info.getStudentPath());
+
                 if(temp.getTestRuns().size() > 1){
                     //TODO: If there are more args for the file? Not sure what to do here.
                 }
