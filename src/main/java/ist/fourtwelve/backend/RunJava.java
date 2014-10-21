@@ -3,6 +3,8 @@ package ist.fourtwelve.backend;
 /**
  * Created by Steve on 9/28/2014.
  */
+import ist.fourtwelve.views.TestProjectGenerationView;
+
 import java.io.*;
 import java.util.*;
 import java.lang.ProcessBuilder.Redirect;
@@ -29,6 +31,8 @@ public class RunJava
     //Debug/Ouput
     private String varToString;
     private String runJavaMethodToString;
+    Scanner myScanner;
+    String tempString;
     /*
     Main Constructor, Set up of the initial info for running java, not compiling
     @args info object which holds all the information relating to paths and such for the program to run.
@@ -59,8 +63,8 @@ public class RunJava
             runJavaMethodToString = "";
 //    set up input files
 //    TestInput.txt has inputs for each test on a single line
-            File testInputFile = new File(testInputFileName);
-            Scanner testInputs = new Scanner(testInputFile);
+            //File testInputFile = new File(testInputFileName);
+            //Scanner testInputs = new Scanner(testInputFile);
 //    input.txt has inputs for a single run each on a separate line
 //    and is created immediately before each test run from TestInput.txt
             System.out.println(testInputFileName);
@@ -134,6 +138,16 @@ public class RunJava
                     pb.redirectInput(Redirect.from(inputFile));
                     pb.redirectErrorStream(true);
                     pb.redirectOutput(Redirect.appendTo(outputFile));
+                    //TODO: Output currently only does the first line of output. Multiple lines do not show up on the GUI at least.
+                    myScanner = new Scanner(outputFile);
+                    tempString = "";
+                    while(myScanner.hasNextLine())
+                    {
+                        tempString += myScanner.nextLine() + "\n";
+                    }
+                    System.out.println("\n\n\n\n tempString is " + tempString);
+                    //TestProjectGenerationView x = (TestProjectGenerationView) info.frame;
+                    //x.setOutputArea(tempString);
                     //runJavaMethodToString += "pb.command() is " + pb.command().toString() + "\n";
                     System.out.println("java process arguments: " + pb.command());
 //        start java process

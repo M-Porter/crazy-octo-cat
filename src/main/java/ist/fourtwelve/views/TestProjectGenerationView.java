@@ -87,7 +87,7 @@ public class TestProjectGenerationView extends javax.swing.JFrame {
 
         projectNameLabel.setText("Project Name:");
 
-        projNameField.setText("enter project name");
+        projNameField.setText("ProjectNameTemplate");
         projNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 projNameFieldActionPerformed(evt);
@@ -96,7 +96,7 @@ public class TestProjectGenerationView extends javax.swing.JFrame {
 
         srcDirLabel.setText("Project Source Dir:");
 
-        srcDirField.setText("enter source directory filepath");
+        srcDirField.setText("studentFiles");
         srcDirField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 srcDirFieldActionPerformed(evt);
@@ -462,7 +462,16 @@ public class TestProjectGenerationView extends javax.swing.JFrame {
         numInputsLabel.setText(""+this.generator.getParamList().size());
         nextInputField.setText("");
     }//GEN-LAST:event_addInputButtonActionPerformed
-
+    public void setOutputArea(String x){
+        outputAreaText = x;
+        outputArea.setText(x);
+    }
+    public void concatOutputArea(String x){
+        if(outputAreaText.equals(null)){
+            setOutputArea(x);
+        }
+        outputArea.setText(outputAreaText + x);
+    }
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
         printProjList();
     }//GEN-LAST:event_refreshButtonActionPerformed
@@ -496,6 +505,7 @@ public class TestProjectGenerationView extends javax.swing.JFrame {
 
     private void CompileButtonActionPerformed(java.awt.event.ActionEvent evt) {
         Setup s = new Setup(generator.getProjList());
+        s.setFrame(this);
         s.compileRunProjects();
     }
 
@@ -575,6 +585,7 @@ public class TestProjectGenerationView extends javax.swing.JFrame {
     private javax.swing.JLabel numRunsDesc2;
     private javax.swing.JLabel numRunsLabel;
     private javax.swing.JTextArea outputArea;
+    private String outputAreaText;
     private javax.swing.JTextArea projListTextArea;
     private javax.swing.JTextField projNameField;
     private javax.swing.JLabel projectNameLabel;

@@ -3,6 +3,7 @@ package ist.fourtwelve.backend;
 /**
  * Created by Steven on 9/28/2014.
  */
+import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -35,6 +36,7 @@ public class RunInfo {
     String outputFileName;
     ArrayList<String> args; //scanner inputs atm
     String classList; //class name for the project
+    JFrame frame;
     //Batch/Single info
     int studentNumber = 0;
     int runNumber = 1;
@@ -108,6 +110,8 @@ public class RunInfo {
     public String getClassList(){return classList;}
     public String getOutputFileName(){return outputFileName;}
     public String getInputFileStub(){return inputFileStub;}
+    public JFrame getFrame(){return frame;}
+    public void setFrame(JFrame x){this.frame = x;}
     public void setInputFileStub(String x){this.inputFileStub = x + "/input";}
     public void setArgs(ArrayList<String> x){this.args = x;}
     public void setClassList(String x){this.classList = x;}
