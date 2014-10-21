@@ -41,7 +41,11 @@ public class RunInfo {
     Basic constructor, Assumes nothing special and is used for testing purposes. Defaults to above.
      */
     public RunInfo (){
-
+        args = new ArrayList<String>();
+        args.add("5 2");
+        args.add("10 4");
+        args.add("15 6");
+        args.add("20 8");
     }//RunInfo()
     /*
     Full Constructor. For when you want to completely redo the configuration, or want to test a configuration

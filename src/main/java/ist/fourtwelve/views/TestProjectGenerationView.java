@@ -452,6 +452,7 @@ public class TestProjectGenerationView extends javax.swing.JFrame {
 
     private void CompileButtonActionPerformed(java.awt.event.ActionEvent evt) {
        Setup s = new Setup(generator.getProjList());
+        s.compileRunProjects();
     }
 
     private void addProjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProjectButtonActionPerformed
