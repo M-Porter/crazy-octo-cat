@@ -33,7 +33,8 @@ public class RunInfo {
     String studentPath;
     String inputFileStub;
     String outputFileName;
-    ArrayList<String> args;
+    ArrayList<String> args; //scanner inputs atm
+    String classList; //class name for the project
     //Batch/Single info
     int studentNumber = 0;
     int runNumber = 1;
@@ -41,7 +42,11 @@ public class RunInfo {
     Basic constructor, Assumes nothing special and is used for testing purposes. Defaults to above.
      */
     public RunInfo (){
-
+        args = new ArrayList<String>();
+        args.add("10 4");
+        args.add("15 6");
+        args.add("20 8");
+        classList = "ArrayLoops";
     }//RunInfo()
     /*
     Full Constructor. For when you want to completely redo the configuration, or want to test a configuration
@@ -65,55 +70,15 @@ public class RunInfo {
         this.argsFileName = aFileName;
         this.testInputFileName = tInputFileName;
         this.testDataPath = sourcePath; //needed?
+        args = new ArrayList<String>();
+        args.add("10 4");
+        args.add("15 6");
+        args.add("20 8");
+        classList = "ArrayLoops";
     }//RunInfo(args)
-    /*
 
-        TODO: Integrate Unzipper for this project. Both Batch and Single.
-     */
-    public void batchSetup(){
-        try
-        {
-//        config file has list of ordinal student number,
-//        student name, and random handle
-            File configFile = new File(configFileName);
-            Scanner in = new Scanner(configFile);
-            int runNumber = 1;
 
-            while(in.hasNextLine())
-            {
-                String line  = in.nextLine();
-                Scanner inLine = new Scanner(line);
-//          debug code - print out scanned config info
-//          System.out.print("scanned config info: ");
-                while(inLine.hasNext())
-                {
-                    studentNumber = inLine.nextInt();
-                    studentName = inLine.next();
-                    studentHandle = inLine.next();
-                }
-//TODO: Incorporate/talk about the Student Handle, Professor, Class, Section and how this can change the directories that are created.
-//          set paths and file names:
-                String classPath = "/java/bin/" + className + studentName;
-                String studentPath = sourcePath + "/" + studentName;
-                String inputFileStub = studentPath + "/input";
-                String outputFileName = studentPath + "/output-" + studentName + ".txt";
-                this.zipFile = studentPath + "/" + studentName + "/" + studentName + ".zip"; // zip setup
-//TODO: Reconfigure how batch is setup. Old method implemented, untested. Incorporate the class into this one?
-                Compiler c = new Compiler(this);
-                int success = c.compileJava();
-//	    Print whether or not compile successful
-                if(success == 0){System.out.println("Compiled Successfully");}
-                else{ System.out.println("Compile Failed"); }
-                RunJava r = new RunJava(this);
-                r.runJava();
-                runNumber++;
-                System.out.println("Moving on to Run Number" + runNumber);
-            }//while:hasNextLine
-        }catch(IOException ioe){
-            System.out.println("Batch IO Exception");
-        }
-//This ends the prep for the object to be sent to the compiler and test runner.
-    }//batchSetup
+        //TODO: Integrate Unzipper for this project. Both Batch and Single.
     /*
      * Setup the information for the single test. Does not need to compile and run inside of RunInfo.
      */
@@ -140,10 +105,14 @@ public class RunInfo {
     public String getClassPath(){return classPath;}
     public String getStudentPath(){return studentPath;}
     public ArrayList<String> getArgs(){return args;}
+    public String getClassList(){return classList;}
+    public String getOutputFileName(){return outputFileName;}
     public void setArgs(ArrayList<String> x){this.args = x;}
+    public void setClassList(String x){this.classList = x;}
     public void setClassPath(String x){this.classPath = x + "/bin";} // You give it the src path
     public void setStudentPath(String x){this.studentPath = x + "/projectFiles" ;} // You give it the src path
     public void setStudentName(String x){this.studentName = x;}
+    public void setOutputFileName(String x){this.outputFileName =x;}
     public void setStudentHandle(String x){this.studentHandle = x;}
     public void setClassName(String x){this.className = x;}
     public void setConfigFileName(String x){this.configFileName = x;}

@@ -7,6 +7,8 @@ import java.io.*;
 import java.util.*;
 import java.lang.ProcessBuilder.Redirect;
 
+import static java.lang.Thread.sleep;
+
 public class RunJava
 {
     private int number;
@@ -50,7 +52,7 @@ public class RunJava
         this.info = info;
 
     }
-    public void runJava()
+    public int runJava()
     {
         try
         {
@@ -61,7 +63,7 @@ public class RunJava
             Scanner testInputs = new Scanner(testInputFile);
 //    input.txt has inputs for a single run each on a separate line
 //    and is created immediately before each test run from TestInput.txt
-
+            System.out.println(testInputFileName);
 //    instantiate output file
             File outputFile = new File(outputFileName);
 
@@ -69,74 +71,88 @@ public class RunJava
             File argsFile = new File(argsFileName);
 
 //    instantiate argument Scanner
-            Scanner argsInput = new Scanner(argsFile);
+            //Scanner argsInput = new Scanner(argsFile);
             int run = 0;
-
+            int i =0;
+            String classes;
+            List<String> inputs = new ArrayList<String>();
+            classes = info.getClassList();
+            inputs = info.getArgs();
+            int size = inputs.size();
+            //Object[] inputsx = inputs.toArray();
+            //String[] inputsString = (String[]) inputsx;
             synchronized(outputFile)
             {
-                while(argsInput.hasNextLine())
+                while(i < size)
                 {
                     run++;
+                    System.out.println(inputs.size());
 //        declare arg ArrayList for java ProcessBuilder
                     List<String> arg = new ArrayList<String>();
-                    String argsLine = argsInput.nextLine();
+                    //String argsLine = argsInput.nextLine();
 //        parse argsLine via TestTools.parseLine
 
-                    arg = TestTools.parseLine(argsLine);
-                    runJavaMethodToString += "arg is " + arg.toString() + "\n";
+                    //arg = TestTools.parseLine(argsLine);
+                    //runJavaMethodToString += "arg is " + arg.toString() + "\n";
                     arg.add(0, "java");
-                    runJavaMethodToString += "arg is " + arg.toString() + "\n";
+                    //runJavaMethodToString += "arg is " + arg.toString() + "\n";
                     arg.add(1, "-cp");
-                    runJavaMethodToString += "arg is " + arg.toString() + "\n";
+                    //runJavaMethodToString += "arg is " + arg.toString() + "\n";
                     arg.add(2, classPath+"/"+name);
-                    runJavaMethodToString += "arg is " + arg.toString() + "\n";
+                    //runJavaMethodToString += "arg is " + arg.toString() + "\n";
+                    arg.add(3, classes); //COUGH HARD CODED COUGH
 //        System.out.println(arg);
 
 //        scan TestInput.txt
-                    String testInputLine = testInputs.nextLine();
-                    runJavaMethodToString += "testInputLine is " + testInputLine.toString() + "\n";
+                    String testInputLine = inputs.get(i);
+                    //runJavaMethodToString += "testInputLine is " + testInputLine.toString() + "\n";
 //        System.out.println(testInputLine);
-
+                    System.out.println(inputs.size());
 //        create input file for current run
-                    List<String> inputs = new ArrayList<String>();
-                    inputs = info.getArgs();
 
-                    //inputs = TestTools.parseLine(testInputLine);
-                    runJavaMethodToString += "inputs is " + inputs.toString() + "\n";
+                    //arg.add(inputs.get(i));
+
+                    //Stuff dealing with inputs is needed.
+                    //TODO:Refactor how this parses the inputs for the arguments.
+                    inputs = TestTools.parseLine(testInputLine);
+                    //runJavaMethodToString += "inputs is " + inputs.toString() + "\n";
                     System.out.println("System.in inputs: " + inputs);
-                    //inputFileName = inputFileStub + run + ".txt";
-                    runJavaMethodToString += "inputFileName is " + inputFileName.toString() + "\n";
-                    /*PrintWriter writeTests = new PrintWriter(inputFileName);
+                    inputFileName = inputFileStub + run + ".txt";
+                    //runJavaMethodToString += "inputFileName is " + inputFileName.toString() + "\n";
+                    PrintWriter writeTests = new PrintWriter(inputFileName);
                     runJavaMethodToString += "writeTests is " + writeTests.toString() + "\n";
                     for(String element : inputs)
                     {
                         writeTests.println(element);
                     }
-                    writeTests.close();*/
-                    //File inputFile = new File(inputFileName);
+                    writeTests.close();
+                    System.out.println(inputs.size());
+                    File inputFile = new File(inputFileName);
 //        create new java ProcessBuilder using arg ArrayList
                     //"java", "-cp", classPath+"/"+name, "ArrayLoops"
                     ProcessBuilder pb = new ProcessBuilder(arg);
-                    runJavaMethodToString += "pb.command() is " + pb.command().toString() + "\n";
+                    //runJavaMethodToString += "pb.command() is " + pb.command().toString() + "\n";
 //        redirect standard input, error, and output files; print process arguments
-                    //pb.redirectInput(Redirect.from(inputFile));
+                    pb.redirectInput(Redirect.from(inputFile));
                     pb.redirectErrorStream(true);
                     pb.redirectOutput(Redirect.appendTo(outputFile));
-                    runJavaMethodToString += "pb.command() is " + pb.command().toString() + "\n";
+                    //runJavaMethodToString += "pb.command() is " + pb.command().toString() + "\n";
                     System.out.println("java process arguments: " + pb.command());
 //        start java process
                     Process p = pb.start();
-                    runJavaMethodToString += "pb.start() has run \n";
+                    //runJavaMethodToString += "pb.start() has run \n";
 //        want processes to run sequentially to keep output in order
 //        basically joins thread to process to force sequential execution
 //        need to be careful - if any process hangs, whole run hangs
 // TODO: Debugging tools for some of this code is still in the original files, removed cause problems. (Seemed unfinished).
-                    p.waitFor();
+                    success = p.waitFor();
+                    sleep(500);
                     assert pb.redirectInput() == Redirect.PIPE;
                     assert pb.redirectOutput().file() == outputFile;
                     assert p.getInputStream().read() == -1;
+                    i++;
                 }
-                return;
+                return success;
             }
         }
         catch(java.lang.IllegalThreadStateException itse){}
@@ -157,8 +173,9 @@ public class RunJava
         catch(Exception e)
         {
             System.out.println("General Runtime Exception");
+            e.printStackTrace();
         }
-
+        return success;
     }
     //TODO: NEW ACCESS MODIFIERS ALSO METHODS TO GET THE INFORMATION??
 

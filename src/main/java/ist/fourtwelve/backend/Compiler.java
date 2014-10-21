@@ -19,6 +19,7 @@ public class Compiler {
     private String outputFileName;
     private int success;
     private String zipFile;
+    private RunInfo info;
     //Debug/Output
     private String varToString;
     private String compileJavaMethodToString;
@@ -36,6 +37,7 @@ public class Compiler {
         studentPath = info.studentPath + "/" + name;
         outputFileName = info.outputFileName;
         zipFile = info.zipFile;
+        this.info = info;
         success = 1;  // Outcome of compilation, success = 0
     }
     public int compileJava(){
@@ -44,16 +46,17 @@ public class Compiler {
             String tempName = "/" + name; //Maybe this should be changed elsewhere?
             boolean createStudentBinName = new File(classPath).mkdirs(); //studentFiles/bin/@name
             boolean createStudentProjectName = new File(studentPath).mkdirs(); //studentFiles/projectFiles/@name
-
+            System.out.println(classPath);
+            System.out.println(studentPath);
             compileJavaMethodToString = "";
             compileJavaMethodToString += "createStudentBinName is " + createStudentBinName + "\n";
             compileJavaMethodToString += "createStudentProjectName is " + createStudentProjectName + "\n";
             /*
             Unzips the students work, into similar directories, Deletes work already in the directory.
-            //TODO: The zip file gotta be the way we want it. and match the above file directories.
-             */
+            //TOD          */
             //Unzipper zip = new Unzipper(zipFile);
-            //zip.decompress();
+            //zip.decompress();O: The zip file gotta be the way we want it. and match the above file directories.
+
 
 
             ProcessBuilder pb = new ProcessBuilder("javac", "-d", classPath, studentPath + "/*.java"); //THIS ASSUMES PATHS ARE RIGHT
@@ -83,6 +86,7 @@ public class Compiler {
         }catch (IOException ioe){
             System.out.println("Compiler CompileJava IOException");
         }catch(Exception e){
+            e.printStackTrace();
             System.out.println("Unknown Exception");
         }
         return success;
