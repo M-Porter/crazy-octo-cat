@@ -12,68 +12,86 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import java.nio.file.*;
+import static java.nio.file.StandardCopyOption.*;
+
 /**
  * Created by mporter on 9/28/14.
+ * Modified by jrittle on 10/22/14.
  */
 public class Unzipper {
 
     private String argFile;
     private String outputDir;
-    private String varToString;
 
     /**
-     * Preferred constructor for project.
+     * Constructor used to simply unzip a file. 
+     * Given a name of the current date
      * @param zipFile
      * @throws IOException
      */
-    public Unzipper(String zipFile) throws IOException {
-        this.argFile = zipFile;
+    public Unzipper(String passedZipFile) throws IOException {
+        //filename for the file to be unzipped
+        this.argFile = passedZipFile;
+
+        //string holding default output folder name based off of date
         this.outputDir = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
+        //start the decompression
+        decompress();
     }
-    public Unzipper(){}
+
     /**
+     * Preferred Constructor
      * Constructor to allow for a custom output directory.
      * @param zipFile
      * @param outputDir
      * @throws IOException
      */
-    public Unzipper(String zipFile, String outputDir) throws IOException {
-        this.argFile = zipFile;
-        this.outputDir = outputDir;
-        varToString = "argFile is " + zipFile + "\n" + "outputDir is " + outputDir + "\n";
+    public Unzipper(String passedZipFile, String passedOutputDir) throws IOException {
+        //filename for the file to be unzipped
+        this.argFile = passedZipFile;
+
+        //string holding custom output directory path
+        this.outputDir = passedOutputDir;
+
+        //start the decompression
+        decompress();
     }
 
     /**
-     *
+     * Method decompresses the specified zip file
      * @throws IOException
      */
     public void decompress() throws IOException {
 
-        ZipFile zipFile = new ZipFile(argFile);
+        ZipFile zipFile = new ZipFile(this.argFile);
         Enumeration<?> enu = zipFile.entries();
 
+        //loop over the enumeration elements and process each zipped entity
         while (enu.hasMoreElements()) {
 
             ZipEntry zipEntry = (ZipEntry) enu.nextElement();
 
-            String name = zipEntry.getName();
+            String currentEntryName = zipEntry.getName();
 
             long size = zipEntry.getSize();
             long compressedSize = zipEntry.getCompressedSize();
 
-            if(!name.contains("__MACOSX")) {
+            //ignoring extraneous data included by an unzip on OSX
+            if(!currentEntryName.contains("__MACOSX")) {
                 System.out.printf("name: %-32s | size: %6d | compressed size: %6d\n",
-                        name, size, compressedSize);
-                varToString += "name: " + name + " | size: " + size + " | compressed size: " + compressedSize + "\n";
-                //System.out.println("varToString is \n" + varToString);
+                        currentEntryName, size, compressedSize);
             }
 
-            File file = new File(name);
-            if (name.endsWith("/")) {
+            //create a directory if the current element is a directory
+            File file = new File(currentEntryName);
+            if (currentEntryName.endsWith("/")) {
                 file.mkdirs();
                 continue;
             }
 
+            //write the current zipped element to an unzipped element
             InputStream is = zipFile.getInputStream(zipEntry);
             FileOutputStream fos = new FileOutputStream(file);
             byte[] bytes = new byte[1024];
@@ -81,13 +99,15 @@ public class Unzipper {
 
             while ((length = is.read(bytes)) >= 0) {
                 fos.write(bytes, 0, length);
-        }
+            }
 
+            //close io file streams
             is.close();
             fos.close();
 
         }
 
+        //close zip filestream
         zipFile.close();
 
         // for mac purposes only, if this directory exists, delete it
@@ -96,10 +116,13 @@ public class Unzipper {
             if(newFile.isDirectory()) delete(new File("__MACOSX"));
         }
 
+        //move unzipped content into a specified directory
+        moveUnzippedContent();
+
     }
 
     /**
-     * Method deletes director if exists.
+     * Method deletes a file if exists.
      * @param f
      */
     public void delete(File f) {
@@ -108,13 +131,46 @@ public class Unzipper {
                 delete(c);
             }
         }
+
         if(!f.delete()) {
             System.out.println("Failed to delete " + f);
         }
     }
-    public String toString()
-    {
-        return varToString;
+
+    /**
+     * Method copies content from the directory created during unzipping
+     * to a specified directory and then deletes the initial directory
+     */
+    public void moveUnzippedContent(){
+        try{
+
+            //get the name of the zip file. 
+            // .length()-4 is to remove the '.zip' extension
+            String inputFolderStr = argFile.substring(0, (argFile.length()-4));
+
+            //file handles for the input and output folders to be used in creating paths
+            File inputFolder = new File(inputFolderStr);
+            File outputFolder = new File(this.outputDir);
+
+            //create the output directory
+            outputFolder.mkdirs();
+
+            //iterate over the unzipped files and copy them into the output directory
+            for (File c : inputFolder.listFiles()){
+                Path inPath = FileSystems.getDefault().getPath(inputFolderStr, c.getName());
+                Path outPath = FileSystems.getDefault().getPath(this.outputDir, c.getName());
+                Files.copy(inPath, outPath, REPLACE_EXISTING);
+
+                System.out.println("inpath: "+inPath);
+                System.out.println("outpath: "+outPath);
+            }
+
+            //deletes the initial unzipped folder
+            delete(inputFolder);
+
+        }catch (IOException ex){
+            System.out.println("IOException in moveUnzippedContent. MSG: "+ex);
+        }
     }
 
 }
