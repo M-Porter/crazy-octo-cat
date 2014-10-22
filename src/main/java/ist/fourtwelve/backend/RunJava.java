@@ -15,24 +15,19 @@ public class RunJava
 {
     private int number;
     private String name;
-    private String handle;
-    private String path;
     private String classPath;
     private String sourcePath;
     private String studentPath;
     private String testDataPath;
-    private String argsFileName;
     private String testInputFileName;
     private String inputFileStub;
     private String inputFileName;
     private String outputFileName;
     private int success;
     private RunInfo info;
+    private String classes;
     //Debug/Ouput
-    private String varToString;
     private String runJavaMethodToString;
-    Scanner myScanner;
-    String tempString;
     /*
     Main Constructor, Set up of the initial info for running java, not compiling
     @args info object which holds all the information relating to paths and such for the program to run.
@@ -42,13 +37,10 @@ public class RunJava
     {
         number = info.runNumber;
         name = info.studentName;
-        handle = info.studentHandle;
-        path = info.path;
         classPath = info.classPath;
         sourcePath = info.sourcePath;
         studentPath = info.studentPath;
         testDataPath = info.testDataPath;
-        argsFileName = info.argsFileName;
         testInputFileName = info.testInputFileName;
         inputFileStub = info.inputFileStub;
         outputFileName = info.outputFileName;
@@ -61,24 +53,13 @@ public class RunJava
         try
         {
             runJavaMethodToString = "";
-//    set up input files
-//    TestInput.txt has inputs for each test on a single line
-            //File testInputFile = new File(testInputFileName);
-            //Scanner testInputs = new Scanner(testInputFile);
-//    input.txt has inputs for a single run each on a separate line
-//    and is created immediately before each test run from TestInput.txt
-            System.out.println(testInputFileName);
+
 //    instantiate output file
             File outputFile = new File(outputFileName);
 
-//    instantiate command-line arguments file
-            File argsFile = new File(argsFileName);
-
 //    instantiate argument Scanner
-            //Scanner argsInput = new Scanner(argsFile);
             int run = 0;
             int i =0;
-            String classes;
             List<String> inputs = new ArrayList<String>();
             classes = info.getClassList();
             inputs = info.getArgs();
@@ -87,36 +68,24 @@ public class RunJava
             {
                 while(i < size)
                 {
-                    inputs = info.getArgs();
+                    inputs = info.getArgs(); //Repopulate the input arraylist is needed to get the arguments(its just how its setup). TODO: Setup so this doesnt need to happen?
                     run++;
 
 //        declare arg ArrayList for java ProcessBuilder
                     List<String> arg = new ArrayList<String>();
-                    //String argsLine = argsInput.nextLine();
-//        parse argsLine via TestTools.parseLine
 
-                    //arg = TestTools.parseLine(argsLine);
-                    //runJavaMethodToString += "arg is " + arg.toString() + "\n";
                     arg.add(0, "java");
-                    //runJavaMethodToString += "arg is " + arg.toString() + "\n";
                     arg.add(1, "-cp");
-                    //runJavaMethodToString += "arg is " + arg.toString() + "\n";
                     arg.add(2, classPath+"/"+name);
-                    //runJavaMethodToString += "arg is " + arg.toString() + "\n";
-                    arg.add(3, classes); //COUGH HARD CODED COUGH
-//        System.out.println(arg);
+                    arg.add(3, classes);
 
-//        scan TestInput.txt
+//        scan Stuff from the GUI
                     String testInputLine = inputs.get(i);
-                    //runJavaMethodToString += "testInputLine is " + testInputLine.toString() + "\n";
-//        System.out.println(testInputLine);
-                    //System.out.println(inputs.size());
+
 //        create input file for current run
 
-                    //arg.add(inputs.get(i));
-
                     //Stuff dealing with inputs is needed.
-                    //TODO:Refactor how this parses the inputs for the arguments.
+                    //TODO:Refactor how this parses the inputs for the arguments. This of course is between scanner and actual arguments, scanner here arguments above.
                     inputs = TestTools.parseLine(testInputLine);
                     //runJavaMethodToString += "inputs is " + inputs.toString() + "\n";
                     System.out.println("System.in inputs: " + inputs);
@@ -131,23 +100,24 @@ public class RunJava
                     writeTests.close();
                     File inputFile = new File(inputFileName);
 //        create new java ProcessBuilder using arg ArrayList
-                    //"java", "-cp", classPath+"/"+name, "ArrayLoops"
+
                     ProcessBuilder pb = new ProcessBuilder(arg);
-                    //runJavaMethodToString += "pb.command() is " + pb.command().toString() + "\n";
+
 //        redirect standard input, error, and output files; print process arguments
                     pb.redirectInput(Redirect.from(inputFile));
                     pb.redirectErrorStream(true);
                     pb.redirectOutput(Redirect.appendTo(outputFile));
                     //TODO: Output currently only does the first line of output. Multiple lines do not show up on the GUI at least.
-                    myScanner = new Scanner(outputFile);
+
+
+                    /*myScanner = new Scanner(outputFile);
                     tempString = "";
                     while(myScanner.hasNextLine())
                     {
                         tempString += myScanner.nextLine() + "\n";
                     }
-                    System.out.println("\n\n\n\n tempString is " + tempString);
-                    //TestProjectGenerationView x = (TestProjectGenerationView) info.frame;
-                    //x.setOutputArea(tempString);
+                    System.out.println("\n\n\n\n tempString is " + tempString);*/
+
                     //runJavaMethodToString += "pb.command() is " + pb.command().toString() + "\n";
                     System.out.println("java process arguments: " + pb.command());
 //        start java process
@@ -155,7 +125,7 @@ public class RunJava
                     //runJavaMethodToString += "pb.start() has run \n";
 //        want processes to run sequentially to keep output in order
 //        basically joins thread to process to force sequential execution
-//        need to be careful - if any process hangs, whole run hangs
+//        need to be careful - if any process hangs, whole run hangs b/c @output file
 // TODO: Debugging tools for some of this code is still in the original files, removed cause problems. (Seemed unfinished).
                     success = p.waitFor();
                     sleep(500);
@@ -189,8 +159,6 @@ public class RunJava
         }
         return success;
     }
-    //TODO: NEW ACCESS MODIFIERS ALSO METHODS TO GET THE INFORMATION??
-
-    public String toString(){return varToString;}
+    //TODO: NEW ACCESS MODIFIERS ALSO METHODS TO GET THE INFORMATION?? tl;dr not really
     public String runJavaMethodToString(){return runJavaMethodToString;}
 }

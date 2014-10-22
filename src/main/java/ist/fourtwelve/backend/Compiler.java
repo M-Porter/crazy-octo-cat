@@ -11,8 +11,6 @@ public class Compiler {
 
     private int number;
     private String name;
-    private String handle;
-    private String path;
     private String classPath;
     private String sourcePath;
     private String studentPath;
@@ -30,8 +28,6 @@ public class Compiler {
      */
     public Compiler(RunInfo info) {
         name = info.studentName;
-        handle = info.studentHandle;
-        path = info.path;
         classPath = info.classPath + "/" + name;
         sourcePath = info.sourcePath;
         studentPath = info.studentPath + "/" + name;

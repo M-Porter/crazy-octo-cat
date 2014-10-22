@@ -1,8 +1,13 @@
 package ist.fourtwelve.backend;
 
 import ist.fourtwelve.models.Project;
+import ist.fourtwelve.views.TestProjectGenerationView;
 
+import javax.swing.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Created by Steve on 10/19/2014.
@@ -16,6 +21,7 @@ public class Setup {
     private RunInfo info;
     private Project project;
     private ArrayList<Project> projects;
+    private JFrame frame;
     /*
     Original Setup, Do not use if methods are called inside
     TODO: Change this method to something concrete and not using test methods.
@@ -55,6 +61,25 @@ public class Setup {
     public void runProjects(){
 
     }
+    public void setFrame(JFrame x){
+        frame = x;
+    }
+    public void setGuiOutput(){
+        TestProjectGenerationView x = (TestProjectGenerationView) frame;
+        File outputFile = new File(info.outputFileName);
+        Scanner myScanner = null;
+        try {
+            myScanner = new Scanner(outputFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        String tempString = "";
+        while(myScanner.hasNextLine())
+        {
+            tempString += myScanner.nextLine() + "\n";
+        }
+        x.setOutputArea(tempString);
+    }
     /*
     Compiles then runs mulitiple projects
      */
@@ -68,10 +93,11 @@ public class Setup {
                 //Setup RunInfo object.
                 info.setStudentPath(temp.getSrcDir());
                 info.setClassPath(temp.getSrcDir());
-                info.setArgs(temp.getTestRuns().get(j).getInputs());//Setup of run arguments-- This might be where the information isnt getting passed correctly.
+                info.setArgs(temp.getTestRuns().get(j).getInputs());//A reminder that this is the setup of the scanner inputs not run arguments.
                 info.setInputFileStub(info.getStudentPath());
-
+                info.setFrame(this.frame);
                 if(temp.getTestRuns().size() > 1){
+                    //IF there more than one test run for a project... do more stuff... else...
                     //TODO: If there are more args for the file? Not sure what to do here.
                 }
                 System.out.println("Path where the files should be located is... also unzipped to" + info.getStudentPath());
@@ -99,13 +125,15 @@ public class Setup {
                     boolean y;
                     if (x == 0){
                         y = true;
+
                     }
                     else {
                         y = false;
                     }
+                    System.out.println("Run fail (false) or not (true) " + y);
                     projects.get(i).getTestRuns().get(j).reportRunSuccess(y); //Untested
                 }
-
+                setGuiOutput();
 
             }
 
