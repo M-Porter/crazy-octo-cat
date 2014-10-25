@@ -27,15 +27,7 @@ public class Setup {
     TODO: Change this method to something concrete and not using test methods.
      */
     public Setup(){
-        info = new RunInfo();
-        info.singleSetup(); //important?
-        compiler = new Compiler(info);
-        runner = new RunJava(info);
-        int success = compiler.compileJava();
-//	    Print whether or not compile successful
-        if(success == 0){System.out.println("Compiled Successfully");}
-        else{System.out.println("Compile Failed");}
-        runner.runJava();
+
     }
 
     public Setup(ArrayList<Project> projects){
@@ -64,9 +56,10 @@ public class Setup {
     public void setFrame(JFrame x){
         frame = x;
     }
+
     public void setGuiOutput(){
         TestProjectGenerationView x = (TestProjectGenerationView) frame;
-        File outputFile = new File(info.outputFileName);
+        File outputFile = new File(info.getOutputFileName());
         Scanner myScanner = null;
         try {
             myScanner = new Scanner(outputFile);
@@ -107,7 +100,8 @@ public class Setup {
                 //make sure it doesnt contain a / in the front of the uh srcDir
                 info.setOutputFileName(info.getStudentPath() + "/output-" + info.getStudentName()+ ".txt");
                 compiler = new Compiler(info);
-                //Synchronized is probably not needed, but could work?
+
+                //Synchronized is probably not needed, but could work? Someone should understand why i am doing this.
                 synchronized (compiler) {
                     int x = compiler.compileJava();
                     boolean y;
@@ -117,6 +111,7 @@ public class Setup {
                     else {
                         y = false;
                     }
+                    System.out.println("Run fail (false) or not (true) " + y);
                     projects.get(i).reportCompileSuccess(y); //Untested
                 }
                 runner = new RunJava(info);

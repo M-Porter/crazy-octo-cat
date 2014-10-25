@@ -19,27 +19,24 @@ public class RunInfo {
 
     //TODO: Should these be private @attributes of run info.
     //TODO: Student/Class/Professor thing relating to what GUI was working with?
-    String studentName = "blank";
-    String studentHandle = "000000";
-    String className = "297D/";
-    String configFileName = "./configBatch.txt";
-    String path = System.getProperty("java.class.path");
-    String sourcePath = "./studentFiles";
-    String testDataPath = sourcePath; //needed?
-    String argsFileName = testDataPath + "/args.txt";
-    String testInputFileName = testDataPath + "/TestInput.txt";
-    String zipFile = studentName + ".zip";
+    private String studentName = "blank";
+    private String studentHandle = "000000";
+    private String className = "297D/";
+    private String configFileName = "./configBatch.txt";
+    private String path = System.getProperty("java.class.path");
+    private String sourcePath = "./studentFiles";
+    private String testDataPath = sourcePath; //needed?
+    private String argsFileName = testDataPath + "/args.txt";
+    private String testInputFileName = testDataPath + "/TestInput.txt";
+    private String zipFile = studentName + ".zip";
     // Compiler information
-    String classPath;
-    String studentPath;
-    String inputFileStub;
-    String outputFileName;
-    ArrayList<String> args; //scanner inputs atm
-    String classList; //class name for the project
-    JFrame frame;
-    //Batch/Single info
-    int studentNumber = 0;
-    int runNumber = 1;
+    private String classPath;
+    private String studentPath;
+    private String inputFileStub;
+    private String outputFileName;
+    private ArrayList<String> args; //scanner inputs atm
+    private String classList; //class name for the project
+    private JFrame frame;
     /*
     Basic constructor, Assumes nothing special and is used for testing purposes. Defaults to above.
      */

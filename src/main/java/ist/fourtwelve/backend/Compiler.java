@@ -9,17 +9,14 @@ import java.lang.ProcessBuilder.Redirect;
 
 public class Compiler {
 
-    private int number;
     private String name;
     private String classPath;
-    private String sourcePath;
     private String studentPath;
     private String outputFileName;
     private int success;
     private String zipFile;
     private RunInfo info;
     //Debug/Output
-    private String varToString;
     private String compileJavaMethodToString;
 
     /*
@@ -27,19 +24,17 @@ public class Compiler {
     @param info current information about the compile.
      */
     public Compiler(RunInfo info) {
-        name = info.studentName;
-        classPath = info.classPath + "/" + name;
-        sourcePath = info.sourcePath;
-        studentPath = info.studentPath + "/" + name;
-        outputFileName = info.outputFileName;
-        zipFile = info.zipFile;
+        name = info.getStudentName();
+        classPath = info.getClassPath() + "/" + name;
+        studentPath = info.getStudentPath() + "/" + name;
+        outputFileName = info.getOutputFileName();
+        zipFile = info.getZipFile();
         this.info = info;
         success = 1;  // Outcome of compilation, success = 0
     }
     public int compileJava(){
         try {
             // Makes some directories for compiling
-            String tempName = "/" + name; //Maybe this should be changed elsewhere?
             boolean createStudentBinName = new File(classPath).mkdirs(); //studentFiles/bin/@name
             boolean createStudentProjectName = new File(studentPath).mkdirs(); //studentFiles/projectFiles/@name
             System.out.println(classPath);
@@ -125,6 +120,5 @@ public class Compiler {
     //TODO Access modifying methods?? Needed or not?
     public void setClassPath(String classPath){this.classPath = classPath;}
     public void setStudentPath(String studentPath){this.studentPath = studentPath;}
-    public String toString(){ return varToString;}
     public String compileJavaMethodToString(){ return compileJavaMethodToString;}
 }
