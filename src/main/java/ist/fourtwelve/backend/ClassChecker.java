@@ -8,6 +8,8 @@ import java.util.Scanner;
 /**
  * Created by mporter on 10/12/14.
  */
+
+//TODO: Fix this from uh reading entire file to reading line by line.
 public class ClassChecker {
 
     private ArrayList<String> file;

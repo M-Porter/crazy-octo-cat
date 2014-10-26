@@ -23,7 +23,7 @@ public class RunJava
     private int success;
     private RunInfo info;
     private String classes;
-    //Debug/Ouput
+    //Debug/Output
     private String runJavaMethodToString;
     /*
     Main Constructor, Set up of the initial info for running java, not compiling

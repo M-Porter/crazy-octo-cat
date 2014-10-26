@@ -19,9 +19,11 @@ public class RunInfo {
 
     //TODO: Should these be private @attributes of run info.
     //TODO: Student/Class/Professor thing relating to what GUI was working with?
+
     private String studentName = "blank";
     private String studentHandle = "000000";
     private String className = "297D/";
+    /** ConfigFileName is something that isn't used anymore */
     private String configFileName = "./configBatch.txt";
     private String path = System.getProperty("java.class.path");
     private String sourcePath = "./studentFiles";

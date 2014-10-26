@@ -20,7 +20,7 @@ public class ClassCheckerTest {
 
     private ArrayList<File> files = new ArrayList<File>();
     private ArrayList<String> params = new ArrayList<String>();
-    private Unzipper unzipper = new Unzipper();
+    //private Unzipper unzipper = new Unzipper();
     @Before
     public void setUp() throws Exception {
         try {
