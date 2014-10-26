@@ -44,8 +44,8 @@ public class Unzipper {
     /**
      * Preferred Constructor
      * Constructor to allow for a custom output directory.
-     * @param zipFile
-     * @param outputDir
+     * @param passedZipFile Zip file needs a specific setup. If the java file is simply on the top directory of the zip file it fails. If it is within another folder, it works correctly. e.g. zip.zip/zip/*.java
+     * @param passedOutputDir 
      * @throws IOException
      */
     public Unzipper(String passedZipFile, String passedOutputDir) throws IOException {

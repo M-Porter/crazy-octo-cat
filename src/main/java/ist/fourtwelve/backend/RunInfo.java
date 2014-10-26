@@ -124,5 +124,5 @@ public class RunInfo {
     public void setSourcePath(String x){this.sourcePath = x;}
     public void setArgsFileName(String x){this.argsFileName = x;}
     public void setTestInputFileName(String x){this.testInputFileName = x;}
-    public void setZipFile (String x){this.zipFile = x;}
+    public void setZipFile (String x){this.zipFile = /*x*/  "blank.zip";} //TESTING PURPOSES, ISSUE.
 }//RunInfo

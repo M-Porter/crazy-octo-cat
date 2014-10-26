@@ -37,31 +37,24 @@ public class Compiler {
             // Makes some directories for compiling
             boolean createStudentBinName = new File(classPath).mkdirs(); //studentFiles/bin/@name
             boolean createStudentProjectName = new File(studentPath).mkdirs(); //studentFiles/projectFiles/@name
-            System.out.println(classPath);
-            System.out.println(studentPath);
-            compileJavaMethodToString = "";
-            compileJavaMethodToString += "createStudentBinName is " + createStudentBinName + "\n";
-            compileJavaMethodToString += "createStudentProjectName is " + createStudentProjectName + "\n";
-            /*
-            Unzips the students work, into similar directories, Deletes work already in the directory.
-            //TOD          */
-            //Unzipper zip = new Unzipper(zipFile);
+            //System.out.println(classPath);
+            //System.out.println(studentPath);
+
+            Unzipper zip = new Unzipper(zipFile,studentPath);
             //zip.decompress();O: The zip file gotta be the way we want it. and match the above file directories.
 
 
 
             ProcessBuilder pb = new ProcessBuilder("javac", "-d", classPath, studentPath + "/*.java"); //THIS ASSUMES PATHS ARE RIGHT
             System.out.println(pb.command().toString()); //Debug
-            compileJavaMethodToString += "pb.command() is " + pb.command().toString() + "\n";
+
             //    set up output file
             File outputFile = new File(outputFileName);
-            //    System.out.println(outputFileName);
             //Not sure what the delete thing does. Clears the file? Makes sure the path is correct?
             outputFile.delete();
             pb.redirectErrorStream(true);
-            compileJavaMethodToString += "redirectErrorStream is " + true + "\n";
             pb.redirectOutput(Redirect.appendTo(outputFile));
-            compileJavaMethodToString += "pb.redirectOutput(Redirect.appendTo(outputFile)) has run \n";
+
 //TODO: Most of the information needs to be changed, but already this can be changed via runInfo,
             //    start javac process
             Process p = pb.start();

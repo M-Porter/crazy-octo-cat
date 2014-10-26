@@ -86,6 +86,7 @@ public class Setup {
                 //Setup RunInfo object.
                 info.setStudentPath(temp.getSrcDir());
                 info.setClassPath(temp.getSrcDir());
+                info.setZipFile(temp.getSrcDir());//TODO: Replace this with something more concrete.
                 info.setArgs(temp.getTestRuns().get(j).getInputs());//A reminder that this is the setup of the scanner inputs not run arguments.
                 info.setInputFileStub(info.getStudentPath());
                 info.setFrame(this.frame);
