@@ -6,7 +6,6 @@ package ist.fourtwelve.backend;
 public class Output {
 
     private String outputString;
-    private Requirements requirementsObject;
     private boolean didCompile;
     private boolean didRun;
 
@@ -20,25 +19,17 @@ public class Output {
          return this.outputString;
     }
 
-    public Requirements getRequirements(){
-        return requirementsObject;
-    }
-
     public boolean getDidCompile(){
-        return didCompile;
+        return this.didCompile;
     }
 
     public boolean getDidRun(){
-        return didRun;
+        return this.didRun;
     }
 
     //mutators
     public void setOutputString(String passedOutputString){
         this.outputString = passedOutputString;
-    }
-
-    public void setRequirements(Requirements passedRequirements){
-        this.requirementsObject = passedRequirements;
     }
 
     public void setDidCompile(boolean passedDidCompile){
