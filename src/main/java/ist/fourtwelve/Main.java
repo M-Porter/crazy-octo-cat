@@ -4,6 +4,7 @@ import ist.fourtwelve.backend.RunInfo;
 import ist.fourtwelve.backend.RunJava;
 import ist.fourtwelve.backend.Compiler;
 import ist.fourtwelve.backend.Setup;
+import ist.fourtwelve.models.ProjectGenerator;
 
 import java.lang.*;
 
@@ -13,7 +14,7 @@ import java.lang.*;
 public class Main {
 
     public static void main(String args[]){
-        Setup s = new Setup();
+        ProjectGenerator generator = new ProjectGenerator();
     }
 
 }
