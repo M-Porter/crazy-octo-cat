@@ -17,7 +17,7 @@ public class Output {
 
     //accessors
     public String getOutputString(){
-        return this.outputString;
+         return this.outputString;
     }
 
     public Requirements getRequirements(){
