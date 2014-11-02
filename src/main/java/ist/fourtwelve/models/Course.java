@@ -91,7 +91,7 @@ public class Course {
     }
 
     /**
-     * studentToAdd Adds the student to the list of the students.
+     * addStudentToList adds the student from theStudentList arraylist of students
      * @param studentToAdd The given student you want added to the course
      */
     public void addStudentToList(Student studentToAdd){
@@ -99,7 +99,7 @@ public class Course {
     }
 
     /**
-     * 
+     * removeStudentFromList removes the student from theStudentList arraylist of students
      * @param studentID The given ID you want the student to have, or the given ID of a student in the course.
      */
     public void removeStudentFromList(int studentID){

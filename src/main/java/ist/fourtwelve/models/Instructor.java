@@ -1,65 +1,95 @@
 package ist.fourtwelve.models;
 import java.util.ArrayList;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * @author cmb5837
  */
 public class Instructor {
-    //Login Credentials
+    /** the username is the username String that the instructor uses to log on*/
     private String username;
+    /** the password is the password char[] that the instructor uses to log on*/
     private char[] password;
     
-    //Contact information\Password Confirmation
+    /** the email is the email String that the instructor uses for contact information*/
     private String email;
     
-    //List of courses the Instructor is responsible for grading
+    /** courseList is the arrayList of courses that the instructor has access to*/
     private ArrayList<Course> courseList;
     
-    //init with just username and password fields
+    /**
+     * this Instructor constructor takes in the username and password
+     * @param username is the String that the instructor uses to log in
+     * @param password is the charArray that the instructor uses to log in
+     */
     public Instructor(String username, char[] password){
         this.username = username;
         this.password = password;
     }
     
-    //init with the additional email field
+    /**
+     * this Instructor constructor takes in the username, password and email
+     * @param username is the String that the instructor uses to log in
+     * @param password is the charArray that the instructors uses to log in
+     * @param email  is the String that the instructor can be contacted at
+     */
     public Instructor(String username, char[] password, String email){
         this.username = username;
         this.password = password;
         this.email    = email;
     }
     
-    //GET/SET Username
+    /**
+     * getUsername returns the string of the username
+     * @return the current username
+     */
     public String getUsername(){
         return this.username;
     }
+    
+    /**
+     * setUserName sets the username string
+     * @param username  is the input username that will be set
+     */
     public void setUsername(String username){
         this.username = username;
     }
     
-    
-    //GET/SET Password
+    /**
+     * getPassword returns the charArray of the password
+     * @return the current password
+     */
     public char[] getPassword(){
         return this.password;   
     }
+    
+    /**
+     * setPassword sets the password charArray
+     * @param password  is the input password that will be set
+     */
     public void setPassword(char[] password){
         this.password = password;
     }
     
-    //GET/SET Email
+    /**
+     * getEmail returns the string of the email
+     * @return the current email
+     */
     public String getEmail(){
         return this.email;
     }
+    
+    /**
+     * setEmail sets the string email
+     * @param email is the input email that will be set
+     */
     public void setEmail(String email){
         this.email = email;
     }
     
-    //GET courseList
+    /**
+     * getCourseList returns the current course list
+     * @return the arrayList of courses
+     */
     public ArrayList<Course> getCourseList(){
         return this.courseList;
     }
