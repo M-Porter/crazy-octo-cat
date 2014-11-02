@@ -1,13 +1,13 @@
 package ist.fourtwelve.backend;
 
-        import ist.fourtwelve.models.Project;
-        import ist.fourtwelve.views.TestProjectGenerationView;
+import ist.fourtwelve.models.Project;
+import ist.fourtwelve.views.TestProjectGenerationView;
 
-        import javax.swing.*;
-        import java.io.File;
-        import java.io.FileNotFoundException;
-        import java.util.ArrayList;
-        import java.util.Scanner;
+import javax.swing.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Created by Steve on 10/19/2014.
@@ -27,22 +27,30 @@ public class Setup {
     private Project project;
     /** projects is an arraylist that contains the student projects */
     private ArrayList<Project> projects;
+    /** frame is the window in which the GUI is located in */
     private JFrame frame;
+    /** output object is instaniated */
     private Output output = new Output();
-    private String outputString;
-    /**
+    /*
     Original Setup, Do not use if methods are called inside
     TODO: Change this method to something concrete and not using test methods.
      */
     public Setup(){
 
     }
-
+    /**
+     * Setup sets projects and info to their respective values
+     * @param projects  projects is the name of the project
+     */
     public Setup(ArrayList<Project> projects){
         this.projects = projects;
         info = new RunInfo();
     }
+    /** 
+    Runs the project without compiling
+     */
     public Setup(Project project){this.project = project;}
+    
     /**
      * method that is used to run the project and outputs whether or not the run was a success
      */
@@ -83,8 +91,8 @@ public class Setup {
         }
     }
     /**
-    Compiles then runs the project
-     */
+    * Compiles then runs the project
+    */
     public void compileRunProject(){
         info.setClassList(project.getMainClassName());
         for (int j = 0; j < project.getTestRuns().size(); j++) {
@@ -135,7 +143,7 @@ public class Setup {
         }
     }
     /**
-    Runs multiple projects without compiling.
+     * Runs multiple projects without compiling.
      */
     public void runProjects(){
         for(int i = 0; i < projects.size(); i++) {
@@ -178,7 +186,7 @@ public class Setup {
         }
     }
     /**
-    Compiles then runs mulitiple projects
+     * Compiles then runs mulitiple projects
      */
     public void compileRunProjects(){
         //For each project....
@@ -257,12 +265,14 @@ public class Setup {
         {
             tempString += myScanner.nextLine() + "\n";
         }
-        outputString += tempString;
-        x.setOutputArea(outputString);
-        output.setOutputString(outputString);
+        x.setOutputArea(tempString);
+        output.setOutputString(tempString);
     }
+    /** setOutput sets the object output to x */
     public void setOutput(Output x){this.output = x;}
+    /** setFrame sets the object frame to x */
     public void setFrame(JFrame x){frame = x;}
+    /** getOutput gets the object output */
     public Output getOutput(){return this.output;}
 
 }

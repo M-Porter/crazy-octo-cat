@@ -29,8 +29,8 @@ public class Compiler {
     /** compileJavaMethodToString is used in joining the thread to the javac process to force sequential execution*/
     private String compileJavaMethodToString;
     /**
-     Constructor, needs a RunInfo object to initialize this object.
-     @param info current information about the compile.
+    Constructor, needs a RunInfo object to initialize this object.
+    @param info current information about the compile.
      */
     public Compiler(RunInfo info) {
         name = info.getStudentName();
@@ -42,7 +42,7 @@ public class Compiler {
         success = 1;  // Outcome of compilation, success = 0
     }
     /**
-     * compileJava is the method that compiles the classes that are to be graded
+     * compileJava is the method that compiles the classes that are to be graded 
      * @return     the method returns the variable success, which depending on the value of the variable indicates whether or not the compile was successful
      */
     public int compileJava(){
@@ -51,7 +51,7 @@ public class Compiler {
             boolean createStudentBinName = new File(classPath).mkdirs(); //studentFiles/bin/@name
             boolean createStudentProjectName = new File(studentPath).mkdirs(); //studentFiles/projectFiles/@name
             //System.out.println(classPath);
-            System.out.println(studentPath);
+            //System.out.println(studentPath);
 
             Unzipper zip = new Unzipper(zipFile,studentPath);
             //zip.decompress();O: The zip file gotta be the way we want it. and match the above file directories.
@@ -82,7 +82,6 @@ public class Compiler {
             assert p.getInputStream().read() == -1;
         }catch (IOException ioe){
             System.out.println("Compiler CompileJava IOException");
-            ioe.printStackTrace();
         }catch(Exception e){
             e.printStackTrace();
             System.out.println("Unknown Exception");
@@ -90,9 +89,9 @@ public class Compiler {
         return success;
     }
     /**
-     Probably shouldn't be here but moves a file from one location to the next.
-     @param filePath Current file in a directory
-     @param toFilePath Desired destination for the first file.
+    Probably shouldn't be here but moves a file from one location to the next.
+    @param filePath Current file in a directory
+    @param toFilePath Desired destination for the first file.
      */
     public void moveFile(String filePath, String toFilePath){
         InputStream inStream = null;
@@ -125,7 +124,10 @@ public class Compiler {
         studentPath = projectDir;
     }
     //TODO Access modifying methods?? Needed or not?
+    /** setClassPath sets the string classPath */
     public void setClassPath(String classPath){this.classPath = classPath;}
+    /** setStudentPat sets the string studentPath */
     public void setStudentPath(String studentPath){this.studentPath = studentPath;}
+    /** compileJavaMethod returns the string compileJavaMethodToString */
     public String compileJavaMethodToString(){ return compileJavaMethodToString;}
 }

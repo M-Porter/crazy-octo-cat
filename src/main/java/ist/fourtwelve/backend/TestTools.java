@@ -3,12 +3,22 @@ import java.io.*;
 import java.util.*;
 import java.lang.ProcessBuilder.Redirect;
 /**
+ * Created by Steve on 9/28/2014.
+ */
+
+/**
  * @author Steve
  * TestTools creates general testing tools
  */
 public class TestTools
 {
     //cd based on String path
+    /**
+     * method cd builds the process
+     * @param currentDir
+     * @param destinationDir
+     * @return returns pb.directory().getAbsolutePath();
+     */
     public static String cd(String currentDir, String destinationDir)
     {
         ProcessBuilder pb = new ProcessBuilder("cd", currentDir);
@@ -18,6 +28,12 @@ public class TestTools
     }
 
     //cd based on abstract File path
+    /**
+     * 
+     * @param cwd
+     * @param destinationPath
+     * @return  returns the File nwd
+     */
     public static File cd(File cwd, String destinationPath)
     {
         String cwdPath;
@@ -64,6 +80,10 @@ public class TestTools
     }
 
     //directory listing method
+    /**
+     * 
+     * @param cwd 
+     */
     public static void dir(File cwd)
     {
         String cwdPath;
@@ -100,6 +120,11 @@ public class TestTools
     }
 
     //String Parser - blank String delimiter
+    /**
+     * 
+     * @param line
+     * @return returns the object tokens
+     */
     public static List<String> parseLine(String line)
     {
         Scanner inputLine = new Scanner(line);

@@ -42,7 +42,8 @@ public class RunJava
     Main Constructor, Set up of the initial info for running java, not compiling
     @args info object which holds all the information relating to paths and such for the program to run.
     //TODO: Cleanup name, number handle? Own object which handles this as per student or professor or class? RunInfo with this info as well.
-     */    public RunJava(RunInfo info)
+     */
+    public RunJava(RunInfo info)
     {
         name = info.getStudentName();
         classPath = info.getClassPath();
@@ -54,9 +55,11 @@ public class RunJava
         this.info = info;
 
     }
-    /**
+    /** 
      * The runJava method is the method that runs the whole process of reading in, checking the student files for errors, running and compiles those files, and writing to an output files
-     * @return
+     * @param run       run is the run number
+     * @param i         i is a counter used to track the position in an array
+     * @return          returns success which indicates whether or not the run was successful
      */
     public int runJava()
     {
@@ -161,5 +164,6 @@ public class RunJava
         return success;
     }
     //TODO: NEW ACCESS MODIFIERS ALSO METHODS TO GET THE INFORMATION?? tl;dr not really
+    /** runJavaMethodToString returns the object runJavaMethodToString */
     public String runJavaMethodToString(){return runJavaMethodToString;}
 }
