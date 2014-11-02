@@ -10,27 +10,39 @@ import java.util.*;
 import java.lang.ProcessBuilder.Redirect;
 
 import static java.lang.Thread.sleep;
-
+/**
+ * RunJava is a central class that runs the entire process
+ * @author Steve
+ */
 public class RunJava
 {
+    /** name is the name of the student file */
     private String name;
+    /** classPath is the location of the class on the computer */
     private String classPath;
+    /** sourcePath is the location of the source file on the computer */
     private String sourcePath;
+    /** studentPath is the location of the student files on the computer*/
     private String studentPath;
+    /** inputFileStub is the directory where the student java files are found*/
     private String inputFileStub;
+    /** inputFileName is the name of the directory where the student java files are found */
     private String inputFileName;
+    /** outputFileName is the name of the output file */
     private String outputFileName;
+    /** success is an integer that has a value depending on whether or not the run succeeded */
     private int success;
+    /** contains the run info for the class */
     private RunInfo info;
     private String classes;
     //Debug/Output
+    /** compileJavaMethodToString is used in joining the thread to the javac process to force sequential execution*/
     private String runJavaMethodToString;
-    /*
+    /**
     Main Constructor, Set up of the initial info for running java, not compiling
     @args info object which holds all the information relating to paths and such for the program to run.
     //TODO: Cleanup name, number handle? Own object which handles this as per student or professor or class? RunInfo with this info as well.
-     */
-    public RunJava(RunInfo info)
+     */    public RunJava(RunInfo info)
     {
         name = info.getStudentName();
         classPath = info.getClassPath();
@@ -42,6 +54,10 @@ public class RunJava
         this.info = info;
 
     }
+    /**
+     * The runJava method is the method that runs the whole process of reading in, checking the student files for errors, running and compiles those files, and writing to an output files
+     * @return
+     */
     public int runJava()
     {
         try

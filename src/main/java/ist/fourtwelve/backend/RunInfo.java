@@ -49,18 +49,18 @@ public class RunInfo {
         args.add("20 8");
         classList = "ArrayLoops";
     }//RunInfo()
-    /*
-    Full Constructor. For when you want to completely redo the configuration, or want to test a configuration
-    @param sName Student Name for the specific directory
-    @param sHandle Student Handle for grading purposes, otherwise unused atm
-    @param cName Classname, Unused atm, but will be used to setup an additional directory to separate classes from each other.
-    @param cFileName ConfigFileName, Where the configuration file is found for RunJava.
-    @param path Path to the java directory, unused?
-    @param sPath SourcePath the first layer directory of where student files are found.
-    @param tDataPath Used in test runner for proper data
-    @param aFileName arguments file name for a mainly used arguments for the project.
-    @param testInputFileName Where the test input is found.
-    */
+    /**
+     * Full Constructor. For when you want to completely redo the configuration, or want to test a configuration
+     * @param sName Student Name for the specific directory
+     * @param sHandle Student Handle for grading purposes, otherwise unused atm
+     * @param cName Classname, Unused atm, but will be used to setup an additional directory to separate classes from each other.
+     * @param cFileName ConfigFileName, Where the configuration file is found for RunJava.
+     * @param path Path to the java directory, unused?
+     * @param sPath SourcePath the first layer directory of where student files are found.
+     * @param tDataPath Used in test runner for proper data
+     * @param aFileName arguments file name for a mainly used arguments for the project.
+     * @param testInputFileName Where the test input is found.
+     */
     public RunInfo (String sName,String sHandle,String cName,String cFileName,String sPath,String aFileName,String tInputFileName){
         this.studentName = sName;
         this.studentHandle = sHandle;
@@ -95,6 +95,7 @@ public class RunInfo {
 //This ends the prep for the object to be sent to the compiler and test runner.
     }//singleSetup()
     //TODO: Remove or add missing modifying methods.
+    /**@return */
     public String getStudentName(){return studentName;}
     public String getStudentNameHandleName(){return studentHandle;}
     public String getClassName(){return className;}

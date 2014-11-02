@@ -1,29 +1,36 @@
 package ist.fourtwelve.backend;
 
-import ist.fourtwelve.models.Project;
-import ist.fourtwelve.views.TestProjectGenerationView;
+        import ist.fourtwelve.models.Project;
+        import ist.fourtwelve.views.TestProjectGenerationView;
 
-import javax.swing.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
+        import javax.swing.*;
+        import java.io.File;
+        import java.io.FileNotFoundException;
+        import java.util.ArrayList;
+        import java.util.Scanner;
 
 /**
  * Created by Steve on 10/19/2014.
  */
-/*
-    Creates a new, or using existing information, to run and compile projects.
+/**
+ * Creates a new, or using existing information, to run and compile projects.
+ * @author Steve
  */
 public class Setup {
+    /** compiler object */
     private Compiler compiler;
+    /** runner object */
     private RunJava runner;
+    /** runInfo object */
     private RunInfo info;
+    /** project object */
     private Project project;
+    /** projects is an arraylist that contains the student projects */
     private ArrayList<Project> projects;
     private JFrame frame;
     private Output output = new Output();
-    /*
+    private String outputString;
+    /**
     Original Setup, Do not use if methods are called inside
     TODO: Change this method to something concrete and not using test methods.
      */
@@ -36,8 +43,8 @@ public class Setup {
         info = new RunInfo();
     }
     public Setup(Project project){this.project = project;}
-    /*
-    Runs the project without compiling
+    /**
+     * method that is used to run the project and outputs whether or not the run was a success
      */
     public void runProject(){
         info.setClassList(project.getMainClassName());
@@ -75,7 +82,7 @@ public class Setup {
             setGuiOutput();
         }
     }
-    /*
+    /**
     Compiles then runs the project
      */
     public void compileRunProject(){
@@ -127,7 +134,7 @@ public class Setup {
             setGuiOutput();
         }
     }
-    /*
+    /**
     Runs multiple projects without compiling.
      */
     public void runProjects(){
@@ -170,7 +177,7 @@ public class Setup {
             }
         }
     }
-    /*
+    /**
     Compiles then runs mulitiple projects
      */
     public void compileRunProjects(){
@@ -233,6 +240,9 @@ public class Setup {
 
         }
     }
+    /**
+     * determines what kind of gui output is used
+     */
     private void setGuiOutput(){
         TestProjectGenerationView x = (TestProjectGenerationView) frame;
         File outputFile = new File(info.getOutputFileName());
@@ -247,8 +257,9 @@ public class Setup {
         {
             tempString += myScanner.nextLine() + "\n";
         }
-        x.setOutputArea(tempString);
-        output.setOutputString(tempString);
+        outputString += tempString;
+        x.setOutputArea(outputString);
+        output.setOutputString(outputString);
     }
     public void setOutput(Output x){this.output = x;}
     public void setFrame(JFrame x){frame = x;}

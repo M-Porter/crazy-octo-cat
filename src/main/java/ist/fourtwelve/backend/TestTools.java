@@ -3,7 +3,8 @@ import java.io.*;
 import java.util.*;
 import java.lang.ProcessBuilder.Redirect;
 /**
- * Created by Steve on 9/28/2014.
+ * @author Steve
+ * TestTools creates general testing tools
  */
 public class TestTools
 {

@@ -20,6 +20,7 @@ import static java.nio.file.StandardCopyOption.*;
 /**
  * Created by mporter on 9/28/14.
  * Modified by jrittle on 10/22/14.
+ * Unzipper is used to unzip the student files
  */
 public class Unzipper {
 

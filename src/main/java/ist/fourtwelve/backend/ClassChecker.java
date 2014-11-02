@@ -10,12 +10,25 @@ import java.util.Scanner;
  */
 
 //TODO: Fix this from uh reading entire file to reading line by line.
+
+/**
+ * @author mporter
+ * Scans in and checks student classes for errors
+ * @param file  file holds the array list of strings that contain data from the files being read in
+ * @param isGtg boolean checks to see if the file has any errors
+ * @param fileName is the location of the file on the PC
+ */
 public class ClassChecker {
 
     private ArrayList<String> file;
     private boolean isGtg = true;
     private String fileName;
-
+    /**
+     * Full Constructor
+     * @param sourceFile
+     * @param s     s is the name of the scanner created to read in class files
+     * @throws FileNotFoundException
+     */
     public ClassChecker(File sourceFile) throws FileNotFoundException {
         Scanner s = new Scanner(sourceFile);
         file = new ArrayList<String>();
@@ -25,7 +38,13 @@ public class ClassChecker {
         s.close();
         fileName = sourceFile.toString();
     }
-
+    /**
+     * checkForUsages checks a class for a certain sequence of code
+     * @param params    params is the arraylist of parameters that are being checked
+     * @param lineNo    lineNo is a counter for the line number in the class that is being checked
+     * @param e         e is a string that holds the sequence of code that the method wants to scan for
+     * @return          returns the boolean isGtg which checks if the file meets the parameters
+     */
     public boolean checkForUsages(ArrayList<String> params) {
         for(String e : params) {
             int lineNo = 1;
@@ -43,7 +62,12 @@ public class ClassChecker {
         }
         return isGtg;
     }
-
+    /**
+     * determineParameterFromLine figures out the type of parameter that needs to be set
+     * @param singleLine            singleLine is a parameter that takes in a line of code from a class
+     * @param parameterReturnCode   the parameterReturnCode is set to a value depending what type of parameter it is
+     * @return                      the parameterReturnCode is returned at the end of the method
+     */
     public int determineParameterFromLine(String singleLine) {
 
         int parameterReturnCode = -1;
