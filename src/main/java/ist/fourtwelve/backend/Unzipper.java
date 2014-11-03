@@ -62,6 +62,7 @@ public class Unzipper {
         try{
             decompress();
         }catch(Exception ex){
+                System.out.println("here: "+currentEntryName);
             ex.printStackTrace();
         }
     }
@@ -102,6 +103,8 @@ public class Unzipper {
             if (currentEntryName.endsWith("/")) {
                 file.mkdirs();
                 continue;
+            }else if (currentEntryName.endsWith(".zip")){
+                Unzipper innerUnzipper = new Unzipper(currentEntryName, "./");
             }
 
             //write the current zipped element to an unzipped element
