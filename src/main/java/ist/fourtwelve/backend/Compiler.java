@@ -50,13 +50,7 @@ public class Compiler {
             // Makes some directories for compiling
             boolean createStudentBinName = new File(classPath).mkdirs(); //studentFiles/bin/@name
             boolean createStudentProjectName = new File(studentPath).mkdirs(); //studentFiles/projectFiles/@name
-            //System.out.println(classPath);
-            //System.out.println(studentPath);
-
-            Unzipper zip = new Unzipper(zipFile,studentPath);
-            //zip.decompress();O: The zip file gotta be the way we want it. and match the above file directories.
-
-
+            Unzipper zip = new Unzipper("./"+zipFile,studentPath);
 
             ProcessBuilder pb = new ProcessBuilder("javac", "-d", classPath, studentPath + "/*.java"); //THIS ASSUMES PATHS ARE RIGHT
             System.out.println(pb.command().toString()); //Debug
@@ -82,6 +76,7 @@ public class Compiler {
             assert p.getInputStream().read() == -1;
         }catch (IOException ioe){
             System.out.println("Compiler CompileJava IOException");
+            ioe.printStackTrace();
         }catch(Exception e){
             e.printStackTrace();
             System.out.println("Unknown Exception");

@@ -206,7 +206,7 @@ public class Setup {
                     //IF there more than one test run for a project... do more stuff... else...
                     //TODO: If there are more args for the file? Not sure what to do here.
                 }
-                System.out.println("Path where the files should be located is... also unzipped to" + info.getStudentPath());
+                System.out.println("Zip File Loc " + info.getZipFile());
                 //TODO: Test compile success.
                 //TODO: Handle args and scanner input separately when GUI gets the stuff here.
                 //TODO: Make sure it doesnt contain a / in the front of the uh srcDir

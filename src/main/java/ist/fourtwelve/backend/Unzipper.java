@@ -13,6 +13,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import java.nio.file.*;
+
+import static java.lang.Thread.sleep;
 import static java.nio.file.StandardCopyOption.*;
 
 /**
@@ -26,9 +28,9 @@ public class Unzipper {
     private String outputDir;
 
     /**
-     * Constructor used to simply unzip a file. 
+     * Constructor used to simply unzip a file.
      * Given a name of the current date
-     * @param zipFile
+     * @param passedZipFile
      * @throws IOException
      */
     public Unzipper(String passedZipFile) throws IOException {
@@ -46,7 +48,7 @@ public class Unzipper {
      * Preferred Constructor
      * Constructor to allow for a custom output directory.
      * @param passedZipFile Zip file needs a specific setup. If the java file is simply on the top directory of the zip file it fails. If it is within another folder, it works correctly. e.g. zip.zip/zip/*.java
-     * @param passedOutputDir 
+     * @param passedOutputDir
      * @throws IOException
      */
     public Unzipper(String passedZipFile, String passedOutputDir) throws IOException {
@@ -57,7 +59,11 @@ public class Unzipper {
         this.outputDir = passedOutputDir;
 
         //start the decompression
-        decompress();
+        try{
+            decompress();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -76,6 +82,12 @@ public class Unzipper {
 
             String currentEntryName = zipEntry.getName();
 
+            /*Force it to make a directory with the last '/' "*/
+            String dir = currentEntryName.substring(0,currentEntryName.lastIndexOf('/'));
+            File temp = new File(dir);
+            temp.mkdirs();
+
+            System.out.println("Zip Entry =" + currentEntryName);
             long size = zipEntry.getSize();
             long compressedSize = zipEntry.getCompressedSize();
 
@@ -122,6 +134,8 @@ public class Unzipper {
 
     }
 
+
+
     /**
      * Method deletes a file if exists.
      * @param f
@@ -145,7 +159,7 @@ public class Unzipper {
     public void moveUnzippedContent(){
         try{
 
-            //get the name of the zip file. 
+            //get the name of the zip file.
             // .length()-4 is to remove the '.zip' extension
             String inputFolderStr = argFile.substring(0, (argFile.length()-4));
 
@@ -157,21 +171,29 @@ public class Unzipper {
             outputFolder.mkdirs();
 
             //iterate over the unzipped files and copy them into the output directory
-            for (File c : inputFolder.listFiles()){
-                Path inPath = FileSystems.getDefault().getPath(inputFolderStr, c.getName());
-                Path outPath = FileSystems.getDefault().getPath(this.outputDir, c.getName());
+            if (inputFolder.isDirectory()){
+                for (File c : inputFolder.listFiles()){
+                    Path inPath = FileSystems.getDefault().getPath(inputFolderStr, c.getName());
+                    Path outPath = FileSystems.getDefault().getPath(this.outputDir, c.getName());
+                    Files.copy(inPath, outPath, REPLACE_EXISTING);
+
+                    System.out.println("inpath: "+inPath);
+                    System.out.println("outpath: "+outPath);
+                }
+            }else{
+                Path inPath = FileSystems.getDefault().getPath("", inputFolder.getName());
+                Path outPath = FileSystems.getDefault().getPath(this.outputDir, inputFolderStr);
                 Files.copy(inPath, outPath, REPLACE_EXISTING);
 
                 System.out.println("inpath: "+inPath);
                 System.out.println("outpath: "+outPath);
             }
-
             //deletes the initial unzipped folder
             delete(inputFolder);
 
         }catch (IOException ex){
             System.out.println("IOException in moveUnzippedContent. MSG: "+ex);
+            ex.printStackTrace();
         }
     }
-
 }

@@ -45,12 +45,24 @@ public class Student {
         theProjectList = new ArrayList();
     }
     /**
-     *
-     * @return
+     * Gets the first name of the student.
+     * @return Returns the current first name of the student.
      */
     public String getFirstName(){ return firstName;}
+    /**
+     * Gets the last name of the student.
+     * @return Returns the current last name of the student.
+     */
     public String getLastName(){return lastName;}
+    /**
+     * Gets the student ID number.
+     * @return Returns the unique identifier for the student.
+     */
     public int getStudentID(){return studentID;}
+    /**
+     * Gets a list of projects the student is currently working on.
+     * @return Returns a list of projects the student is currently a part of.
+     */
     public ArrayList<Project> getStudentProject(){return theProjectList;}
     
     
