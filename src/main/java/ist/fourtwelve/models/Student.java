@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Student {
     /**ArrayList of projects the student belongs to*/
     private ArrayList<Project> theProjectList;
-    /**A number the student can be identified by*/
+    /**@field studentID A number the student can be identified by*/
     private int studentID;
     /**A way to personally identify a student */
     private String firstName;
@@ -45,23 +45,23 @@ public class Student {
         theProjectList = new ArrayList();
     }
     /**
-     * Gets the first name of the student.
-     * @return Returns the current first name of the student.
+     * Access field {@link #firstName}
+     * @return Returns {@link #firstName},the current first name of the student.
      */
     public String getFirstName(){ return firstName;}
     /**
-     * Gets the last name of the student.
-     * @return Returns the current last name of the student.
+     * Access field {@link #lastName}
+     * @return Returns {@link #firstName},the current last name of the student.
      */
     public String getLastName(){return lastName;}
     /**
-     * Gets the student ID number.
-     * @return Returns the unique identifier for the student.
+     * Access field {@link #studentID}
+     * @return Returns {@link #studentID} the unique identifier for the student.
      */
     public int getStudentID(){return studentID;}
     /**
-     * Gets a list of projects the student is currently working on.
-     * @return Returns a list of projects the student is currently a part of.
+     * Access field {@link #theProjectList}
+     * @return Returns {@link #theProjectList}, a list of projects the student is currently a part of.
      */
     public ArrayList<Project> getStudentProject(){return theProjectList;}
     

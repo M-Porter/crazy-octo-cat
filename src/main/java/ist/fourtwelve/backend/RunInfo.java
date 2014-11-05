@@ -51,6 +51,7 @@ public class RunInfo {
     private String outputFileName;
     /** args is an arraylist of arguments */
     private ArrayList<String> args; //scanner inputs atm
+    private ArrayList<String> scannerInputs;
     private String classList; //class name for the project
     private JFrame frame;
     /**
@@ -135,6 +136,10 @@ public class RunInfo {
     public String getInputFileStub(){return inputFileStub;}
     /** getFrame gets the JFrame frame */
     public JFrame getFrame(){return frame;}
+    /** gets the current list of scanner inputs for the run */
+    public ArrayList<String> getScannerInputs(){return scannerInputs;}
+    /** sets the current scanner inputs for this run */
+    public void setScannerInputs(ArrayList<String> x){this.scannerInputs = x;}
     /** setFrame sets the frame to x */
     public void setFrame(JFrame x){this.frame = x;}
     /** setInputFileStub sets the string inputFileStub to x + "/input" */
@@ -164,5 +169,5 @@ public class RunInfo {
     /** setTestInputFileName sets the string testInputFileName to x */
     public void setTestInputFileName(String x){this.testInputFileName = x;}
     /** setZipFile sets the string zipFile to x */
-    public void setZipFile (String x){this.zipFile = /*x*/  "blank2.zip";} //TESTING PURPOSES, ISSUE.
+    public void setZipFile (String x){this.zipFile = /*x*/  "blank.zip";} //TESTING PURPOSES, ISSUE.
 }//RunInfo

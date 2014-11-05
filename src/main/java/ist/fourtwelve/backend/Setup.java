@@ -31,10 +31,7 @@ public class Setup {
     private JFrame frame;
     /** output object is instaniated */
     private Output output = new Output();
-    /*
-    Original Setup, Do not use if methods are called inside
-    TODO: Change this method to something concrete and not using test methods.
-     */
+    //TODO: Change this method to something concrete and not using test methods.
     public Setup(){
 
     }
@@ -55,12 +52,17 @@ public class Setup {
      * method that is used to run the project and outputs whether or not the run was a success
      */
     public void runProject(){
+        ArrayList<String> test = new ArrayList();
+        test.add("5");
+        test.add("10");
+        test.add("15");
         info.setClassList(project.getMainClassName());
         for (int j = 0; j < project.getTestRuns().size(); j++) {
             info.setStudentPath(project.getSrcDir());
             info.setClassPath(project.getSrcDir());
             info.setZipFile(project.getSrcDir());//TODO: Replace this with something more concrete.
-            info.setArgs(project.getTestRuns().get(j).getInputs());//A reminder that this is the setup of the scanner inputs not run arguments.
+            info.setArgs(test);
+            info.setScannerInputs(project.getTestRuns().get(j).getInputs());
             info.setInputFileStub(info.getStudentPath());
             info.setFrame(this.frame);
             if(project.getTestRuns().size() > 1){
@@ -94,12 +96,17 @@ public class Setup {
     * Compiles then runs the project
     */
     public void compileRunProject(){
+        ArrayList<String> test = new ArrayList();
+        test.add("5");
+        test.add("10");
+        test.add("15");
         info.setClassList(project.getMainClassName());
         for (int j = 0; j < project.getTestRuns().size(); j++) {
             info.setStudentPath(project.getSrcDir());
             info.setClassPath(project.getSrcDir());
             info.setZipFile(project.getSrcDir());//TODO: Replace this with something more concrete.
-            info.setArgs(project.getTestRuns().get(j).getInputs());//A reminder that this is the setup of the scanner inputs not run arguments.
+            info.setArgs(test);
+            info.setScannerInputs(project.getTestRuns().get(j).getInputs());
             info.setInputFileStub(info.getStudentPath());
             info.setFrame(this.frame);
             if(project.getTestRuns().size() > 1){
@@ -146,6 +153,10 @@ public class Setup {
      * Runs multiple projects without compiling.
      */
     public void runProjects(){
+        ArrayList<String> test = new ArrayList();
+        test.add("5");
+        test.add("10");
+        test.add("15");
         for(int i = 0; i < projects.size(); i++) {
             Project temp = projects.get(i);
             info.setClassList(temp.getMainClassName());
@@ -155,7 +166,8 @@ public class Setup {
                 info.setStudentPath(temp.getSrcDir());
                 info.setClassPath(temp.getSrcDir());
                 info.setZipFile(temp.getSrcDir());//TODO: Replace this with something more concrete.
-                info.setArgs(temp.getTestRuns().get(j).getInputs());//A reminder that this is the setup of the scanner inputs not run arguments.
+                info.setArgs(test);
+                info.setScannerInputs(temp.getTestRuns().get(j).getInputs());
                 info.setInputFileStub(info.getStudentPath());
                 info.setFrame(this.frame);
                 if (temp.getTestRuns().size() > 1) {
@@ -189,7 +201,11 @@ public class Setup {
      * Compiles then runs mulitiple projects
      */
     public void compileRunProjects(){
-        //For each project....
+        ArrayList<String> test = new ArrayList();
+        test.add("5");
+        test.add("10");
+        test.add("15");
+
         for(int i = 0; i < projects.size(); i++) {
             Project temp = projects.get(i);
             info.setClassList(temp.getMainClassName());
@@ -199,7 +215,8 @@ public class Setup {
                 info.setStudentPath(temp.getSrcDir());
                 info.setClassPath(temp.getSrcDir());
                 info.setZipFile(temp.getSrcDir());//TODO: Replace this with something more concrete.
-                info.setArgs(temp.getTestRuns().get(j).getInputs());//A reminder that this is the setup of the scanner inputs not run arguments.
+                info.setArgs(test);
+                info.setScannerInputs(temp.getTestRuns().get(j).getInputs());
                 info.setInputFileStub(info.getStudentPath());
                 info.setFrame(this.frame);
                 if(temp.getTestRuns().size() > 1){

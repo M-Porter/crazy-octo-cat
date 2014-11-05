@@ -57,8 +57,6 @@ public class RunJava
     }
     /** 
      * The runJava method is the method that runs the whole process of reading in, checking the student files for errors, running and compiles those files, and writing to an output files
-     * @param run       run is the run number
-     * @param i         i is a counter used to track the position in an array
      * @return          returns success which indicates whether or not the run was successful
      */
     public int runJava()
@@ -74,13 +72,13 @@ public class RunJava
             int i =0;
             List<String> inputs = new ArrayList<String>();
             classes = info.getClassList();
-            inputs = info.getArgs();
+            inputs = info.getScannerInputs();
             int size = inputs.size();
             synchronized(outputFile)
             {
                 while(i < size)
                 {
-                    inputs = info.getArgs(); //Repopulate the input arraylist is needed to get the arguments(its just how its setup). TODO: Setup so this doesnt need to happen?
+                    inputs = info.getScannerInputs(); //Repopulate the input arraylist is needed to get the arguments(its just how its setup). TODO: Setup so this doesnt need to happen?
                     run++;
 
                     //TODO: Argument Inputs added on and handled...
@@ -92,7 +90,7 @@ public class RunJava
                     arg.add(1, "-cp");
                     arg.add(2, classPath+"/"+name);
                     arg.add(3, classes);
-
+                    arg.add(4, info.getArgs().get(i));
 //        scan Stuff from the GUI, scanner inputs
                     String testInputLine = inputs.get(i);
 
