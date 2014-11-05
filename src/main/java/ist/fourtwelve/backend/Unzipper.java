@@ -108,9 +108,9 @@ public class Unzipper {
             if (currentEntryName.endsWith("/")) {
                 file.mkdirs();
                 continue;
-            }else if (currentEntryName.endsWith(".zip")){ //Attempts to unzip if there is a directory.
+            }/*else if (currentEntryName.endsWith(".zip")){ //Attempts to unzip if there is a directory.
                 Unzipper innerUnzipper = new Unzipper(currentEntryName, "./");
-            }
+            }*/
 
             //write the current zipped element to an unzipped element
             InputStream is = zipFile.getInputStream(zipEntry);
@@ -188,14 +188,23 @@ public class Unzipper {
 
                     System.out.println("inpath: "+inPath);
                     System.out.println("outpath: "+outPath);
+                    System.out.println(outPath.toString().substring(0,outPath.toString().length() - 4));
+                    if (outPath.toString().endsWith(".zip")) { //Attempts to unzip if there is a directory.
+                        Unzipper innerUnzipper = new Unzipper(outPath.toString(), outPath.toString().substring(0,outPath.toString().length()-4));
+                    }
                 }
             }else{
+                //TODO: path of the first folder in the zip folder must be named the same as the folder itself.
                 Path inPath = FileSystems.getDefault().getPath("", inputFolder.getName());
                 Path outPath = FileSystems.getDefault().getPath(this.outputDir, inputFolderStr);
                 Files.copy(inPath, outPath, REPLACE_EXISTING);
 
                 System.out.println("inpath: "+inPath);
                 System.out.println("outpath: "+outPath);
+                System.out.println(outPath.toString().substring(0,outPath.toString().length() - 4));
+                if (outPath.toString().endsWith(".zip")) { //Attempts to unzip if there is a directory.
+                    Unzipper innerUnzipper = new Unzipper(outPath.toString(), outPath.toString().substring(0,outPath.toString().length() - 4));
+                }
             }
             //deletes the initial unzipped folder
             delete(inputFolder);

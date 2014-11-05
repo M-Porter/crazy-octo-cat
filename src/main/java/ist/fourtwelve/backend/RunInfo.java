@@ -54,7 +54,7 @@ public class RunInfo {
     private String classList; //class name for the project
     private JFrame frame;
     /**
-    Basic constructor, Assumes nothing special and is used for testing purposes. Defaults to above.
+    Basic constructor, Assumes nothing special and is used for testing purposes. Defaults to above, testing purposes only.
      */
     public RunInfo (){
         args = new ArrayList<String>();
@@ -69,11 +69,9 @@ public class RunInfo {
     * @param sHandle Student Handle for grading purposes, otherwise unused atm
     * @param cName Classname, Unused atm, but will be used to setup an additional directory to separate classes from each other.
     * @param cFileName ConfigFileName, Where the configuration file is found for RunJava.
-    * @param path Path to the java directory, unused?
     * @param sPath SourcePath the first layer directory of where student files are found.
-    * @param tDataPath Used in test runner for proper data
     * @param aFileName arguments file name for a mainly used arguments for the project.
-    * @param testInputFileName Where the test input is found.
+    * @param tInputFileName Where the test input is found.
     */
     public RunInfo (String sName,String sHandle,String cName,String cFileName,String sPath,String aFileName,String tInputFileName){
         this.studentName = sName;
@@ -91,33 +89,31 @@ public class RunInfo {
         args.add("20 8");
         classList = "ArrayLoops";
     }//RunInfo(args)
-
-
-        //TODO: Integrate Unzipper for this project. Both Batch and Single.
-    /*
-     * Setup the information for the single test. Does not need to compile and run inside of RunInfo.
-     */
-    public void singleSetup(){
-//TODO: Have it read from a config file? This was copied directly from the old files.
-// Setup names for compiler
-        classPath = sourcePath + "/bin"; //changed new setup of directories
-        studentPath = sourcePath + "/projectFiles"; // /studentFiles/projectFiles
-        inputFileStub = studentPath + "/input"; // /studentFiles/projectFiles/input
-        outputFileName = studentPath + "/output-" + studentName + ".txt"; // /studentFiles/projectFiles/output-'blank'.txt
-        this.zipFile = studentPath + "/" + studentName + "/" + studentName + ".zip"; // zip setup
-        System.out.println(zipFile);
-//This ends the prep for the object to be sent to the compiler and test runner.
-    }//singleSetup()
     //TODO: Remove or add missing modifying methods.
-    /** getStudentName gets the string studentName */
+    /**
+     * Gets the string {@link #studentName}
+     * @return {@link #studentName} the current student name for this run.
+     */
     public String getStudentName(){return studentName;}
-    /** getStudentNameHandleName gets the string student Handle */
+    /**
+     * Gets the string {@link #studentHandle}
+     * @return {@link #studentHandle} the current student handle being used for this run
+     */
     public String getStudentNameHandleName(){return studentHandle;}
-    /** getClassName gets the string className */
+    /**
+     * Gets the string {@link #className}
+     * @return {@link #className} the current run's class name.
+     */
     public String getClassName(){return className;}
-    /** getConfigFileName gets the string configFileName*/
+    /**
+     * Gets the string {@link #configFileName}
+     * @return {@link #configFileName} the current run's configuration file name.
+     */
     public String getConfigFileName(){return configFileName;}
-    /** getSourcePath gets the string sourcePath */
+    /**
+     * Gets the string {@link #sourcePath}
+     * @return {@link #sourcePath} the current run's source path.
+     */
     public String getSourcePath(){return sourcePath;}
     /** getArgsFileName gets the string argsFileName */
     public String getArgsFileName(){return argsFileName;}
@@ -168,5 +164,5 @@ public class RunInfo {
     /** setTestInputFileName sets the string testInputFileName to x */
     public void setTestInputFileName(String x){this.testInputFileName = x;}
     /** setZipFile sets the string zipFile to x */
-    public void setZipFile (String x){this.zipFile = /*x*/  "blank.zip";} //TESTING PURPOSES, ISSUE.
+    public void setZipFile (String x){this.zipFile = /*x*/  "blank2.zip";} //TESTING PURPOSES, ISSUE.
 }//RunInfo

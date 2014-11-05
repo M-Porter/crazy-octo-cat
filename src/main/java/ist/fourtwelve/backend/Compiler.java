@@ -11,20 +11,18 @@ import java.lang.ProcessBuilder.Redirect;
 public class Compiler {
     /** Name is the name of the class that is to be compiled*/
     private String name;
-    /** classPath is the location on the computer where the class is located*/
+    /** {@link RunInfo#classPath}, is the location where the code is compiled to*/
     private String classPath;
-    /** studentPath is the location of the project on the computer*/
+    /** studentPath is the location where the source code is found*/
     private String studentPath;
-    /** outputFileName outputFileName is the name of the output file*/
+    /** outputFileName outputFileName is the location of the output file*/
     private String outputFileName;
-    /** success       success is the integer that holds a certain value depending on whether or not the class has complied succesfully*/
+    /** success success is the integer that holds a certain value depending on whether or not the class has complied succesfully*/
     private int success;
-    /** zipFile is the name of the zipfile that contains the student classes*/
+    /** zipFile is the path of the zipfile that contains the student classes*/
     private String zipFile;
     /** info contains the run info for the class*/
     private RunInfo info;
-    /** compileJavaMethodToString is used in joining the thread to the javac process to force sequential execution*/
-    private String compileJavaMethodToString;
     /**
     Constructor, needs a RunInfo object to initialize this object.
     @param info current information about the compile.
@@ -49,25 +47,16 @@ public class Compiler {
             boolean createStudentProjectName = new File(studentPath).mkdirs(); //studentFiles/projectFiles/@name
             Unzipper zip = new Unzipper("./"+zipFile,studentPath);
 
-            ProcessBuilder pb = new ProcessBuilder("javac", "-d", classPath, studentPath + "/*.java"); //THIS ASSUMES PATHS ARE RIGHT
+            ProcessBuilder pb = new ProcessBuilder("javac", "-d", classPath, studentPath + "/*.java");
             System.out.println(pb.command().toString()); //Debug
-
-            //    set up output file
-            File outputFile = new File(outputFileName);
-            //Not sure what the delete thing does. Clears the file? Makes sure the path is correct?
+            File outputFile = new File(outputFileName);// set up output file
+            //Not sure what the delete thing does. Clears the file? Makes sure the path is correct? Pretty sure just clears the file though
             outputFile.delete();
             pb.redirectErrorStream(true);
             pb.redirectOutput(Redirect.appendTo(outputFile));
-
-//TODO: Most of the information needs to be changed, but already this can be changed via runInfo,
             //    start javac process
             Process p = pb.start();
-            compileJavaMethodToString += "pb.start() has run \n";
-            //    need other processes to wait for compilation to finish
-            //    basically joins the thread to the javac process to force sequential
-            //    execution - need to be careful - if any process hangs, whole run hangs
             success = p.waitFor(); //Returns anything else but 1 if it doesn't run.
-            compileJavaMethodToString += "success is " + success + "\n";
             assert pb.redirectInput() == Redirect.PIPE;
             assert pb.redirectOutput().file() == outputFile;
             assert p.getInputStream().read() == -1;
@@ -76,7 +65,7 @@ public class Compiler {
             ioe.printStackTrace();
         }catch(Exception e){
             e.printStackTrace();
-            System.out.println("Unknown Exception");
+            System.out.println("Compiler Unhandled Exception");
         }
         return success;
     }
@@ -111,15 +100,10 @@ public class Compiler {
         }
     }
 
-    public void setDirectories(String binDir, String projectDir){
-        classPath = binDir;
-        studentPath = projectDir;
-    }
-    //TODO Access modifying methods?? Needed or not?
-    /** setClassPath sets the string classPath */
-    public void setClassPath(String classPath){this.classPath = classPath;}
-    /** setStudentPat sets the string studentPath */
-    public void setStudentPath(String studentPath){this.studentPath = studentPath;}
-    /** compileJavaMethod returns the string compileJavaMethodToString */
-    public String compileJavaMethodToString(){ return compileJavaMethodToString;}
+    /**
+     * Gets whether or not the program compiled
+     * @return Returns if it compiled or not in integer form.
+     */
+    public int getSuccess(){return success;}
+
 }

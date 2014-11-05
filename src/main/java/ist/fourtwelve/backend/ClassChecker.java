@@ -24,9 +24,8 @@ public class ClassChecker {
     private String fileName;
 /**
  * Full Constructor
- * @param sourceFile
- * @param s     s is the name of the scanner created to read in class files
- * @throws FileNotFoundException 
+ * @param sourceFile is the name of the scanner created to read in class files
+ * @throws FileNotFoundException If the file is not present this will be thrown. Must be handled to ensure no breaks.
  */
     public ClassChecker(File sourceFile) throws FileNotFoundException {
         Scanner s = new Scanner(sourceFile);
