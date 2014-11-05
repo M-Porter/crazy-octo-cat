@@ -34,6 +34,7 @@ public class RunJava
     private int success;
     /** contains the run info for the class */
     private RunInfo info;
+    /** what main classes will be run for the */
     private String classes;
     //Debug/Output
     /** compileJavaMethodToString is used in joining the thread to the javac process to force sequential execution*/
@@ -81,7 +82,7 @@ public class RunJava
                     inputs = info.getScannerInputs(); //Repopulate the input arraylist is needed to get the arguments(its just how its setup). TODO: Setup so this doesnt need to happen?
                     run++;
 
-                    //TODO: Argument Inputs added on and handled...
+                    //TODO: Needs to handle if this is a junit test or not.....
 
 //        declare arg ArrayList for java ProcessBuilder
                     List<String> arg = new ArrayList<String>();
@@ -97,21 +98,17 @@ public class RunJava
                     //Scanner inputs are handled here.
 
                     inputs = TestTools.parseLine(testInputLine);
-
-                    //runJavaMethodToString += "inputs is " + inputs.toString() + "\n";
                     System.out.println("System.in inputs: " + inputs);
 
                     inputFileName = inputFileStub + run + ".txt";
-                    //runJavaMethodToString += "inputFileName is " + inputFileName.toString() + "\n";
                     PrintWriter writeTests = new PrintWriter(inputFileName);
-                    runJavaMethodToString += "writeTests is " + writeTests.toString() + "\n";
                     for(String element : inputs)
                     {
                         writeTests.println(element);
                     }
                     writeTests.close();
                     File inputFile = new File(inputFileName);
-
+                    //Scanner inputs are finished being handled.
 
 //        Runs the code we already built.
 
@@ -122,12 +119,9 @@ public class RunJava
                     pb.redirectErrorStream(true);
                     pb.redirectOutput(Redirect.appendTo(outputFile));
 
-
-                    //runJavaMethodToString += "pb.command() is " + pb.command().toString() + "\n";
                     System.out.println("java process arguments: " + pb.command());
 //        start java process
                     Process p = pb.start();
-                    //runJavaMethodToString += "pb.start() has run \n";
 
                     success = p.waitFor();
                     sleep(500); //Sleep used here to ensure the code had a generous amount of time to run.
@@ -161,7 +155,4 @@ public class RunJava
         }
         return success;
     }
-    //TODO: NEW ACCESS MODIFIERS ALSO METHODS TO GET THE INFORMATION?? tl;dr not really
-    /** runJavaMethodToString returns the object runJavaMethodToString */
-    public String runJavaMethodToString(){return runJavaMethodToString;}
 }

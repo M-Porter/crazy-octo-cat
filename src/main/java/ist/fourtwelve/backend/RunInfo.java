@@ -54,6 +54,7 @@ public class RunInfo {
     private ArrayList<String> scannerInputs;
     private String classList; //class name for the project
     private JFrame frame;
+    private boolean isJunit;
     /**
     Basic constructor, Assumes nothing special and is used for testing purposes. Defaults to above, testing purposes only.
      */
@@ -138,6 +139,13 @@ public class RunInfo {
     public JFrame getFrame(){return frame;}
     /** gets the current list of scanner inputs for the run */
     public ArrayList<String> getScannerInputs(){return scannerInputs;}
+    /**
+     * {@link #isJunit} tells if this run is a junit test or not
+     * @return {@link #isJunit} if the run is a junit test or not.
+     */
+    public boolean isJunit(){return isJunit;}
+    /** sets up if the run is a junit test or not */
+    public void setJunit(boolean x){this.isJunit = x;}
     /** sets the current scanner inputs for this run */
     public void setScannerInputs(ArrayList<String> x){this.scannerInputs = x;}
     /** setFrame sets the frame to x */
