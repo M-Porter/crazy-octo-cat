@@ -1,8 +1,5 @@
 package ist.fourtwelve.backend;
 
-/**
- * Created by mporter on 9/28/14.
- */
 import java.io.*;
 import java.util.*;
 import java.lang.ProcessBuilder.Redirect;

@@ -48,8 +48,8 @@ public class Unzipper {
      * Preferred Constructor
      * Constructor to allow for a custom output directory.
      * @param passedZipFile Zip file needs a specific setup. If the java file is simply on the top directory of the zip file it fails. If it is within another folder, it works correctly. e.g. zip.zip/zip/*.java
-     * @param passedOutputDir
-     * @throws IOException
+     * @param passedOutputDir Directory where files found within the zip file are unzipped into or moved into.
+     * @throws IOException Typically happens when your directory is not found to the zip file, output directory should be made within compiler or outside if possible.
      */
     public Unzipper(String passedZipFile, String passedOutputDir) throws IOException {
         //filename for the file to be unzipped
@@ -62,7 +62,7 @@ public class Unzipper {
         try{
             decompress();
         }catch(Exception ex){
-                System.out.println("here: "+currentEntryName);
+                System.out.println("here: " + passedZipFile +" " + passedOutputDir);
             ex.printStackTrace();
         }
     }
@@ -84,10 +84,15 @@ public class Unzipper {
             String currentEntryName = zipEntry.getName();
 
             /*Force it to make a directory with the last '/' "*/
-            String dir = currentEntryName.substring(0,currentEntryName.lastIndexOf('/'));
-            File temp = new File(dir);
-            temp.mkdirs();
+            System.out.println(currentEntryName);
+            if(currentEntryName.lastIndexOf('/') < 0){
 
+            }
+            else {
+                String dir = currentEntryName.substring(0, currentEntryName.lastIndexOf('/'));
+                File temp = new File(dir);
+                temp.mkdirs();
+            }
             System.out.println("Zip Entry =" + currentEntryName);
             long size = zipEntry.getSize();
             long compressedSize = zipEntry.getCompressedSize();
@@ -103,7 +108,7 @@ public class Unzipper {
             if (currentEntryName.endsWith("/")) {
                 file.mkdirs();
                 continue;
-            }else if (currentEntryName.endsWith(".zip")){
+            }else if (currentEntryName.endsWith(".zip")){ //Attempts to unzip if there is a directory.
                 Unzipper innerUnzipper = new Unzipper(currentEntryName, "./");
             }
 
@@ -164,6 +169,7 @@ public class Unzipper {
 
             //get the name of the zip file.
             // .length()-4 is to remove the '.zip' extension
+            //TODO: If the zip file does not have a root diretory, so if files are found on base directory of the zip, it will not unzip correctly. Looks for the folder with the name of the zip file anyway and does not find it exactly.
             String inputFolderStr = argFile.substring(0, (argFile.length()-4));
 
             //file handles for the input and output folders to be used in creating paths
