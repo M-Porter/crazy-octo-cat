@@ -82,16 +82,24 @@ public class RunJava
                     inputs = info.getScannerInputs(); //Repopulate the input arraylist is needed to get the arguments(its just how its setup). TODO: Setup so this doesnt need to happen?
                     run++;
 
-                    //TODO: Needs to handle if this is a junit test or not.....
+                    //TODO: Needs to handle if this is a junit test or not.....java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore [test class name]
 
 //        declare arg ArrayList for java ProcessBuilder
                     List<String> arg = new ArrayList<String>();
 
                     arg.add(0, "java");
                     arg.add(1, "-cp");
-                    arg.add(2, classPath+"/"+name);
-                    arg.add(3, classes);
-                    arg.add(4, info.getArgs().get(i));
+
+                    if(info.isJunit()){
+                        arg.add(2,"./java/jar/junit.jar");
+                        arg.add(3,"org.junit.runner.JUnitCore");
+                        arg.add(4,classes);
+                    }
+                    else{
+                        arg.add(2, classPath+"/"+name);
+                        arg.add(3, classes);
+                        arg.add(4, info.getArgs().get(i));
+                    }
 //        scan Stuff from the GUI, scanner inputs
                     String testInputLine = inputs.get(i);
 
