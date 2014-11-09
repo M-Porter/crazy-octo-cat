@@ -2,3 +2,5 @@
 .idea
 *.iml
 *.zip
+/nbproject/private/
+/build/

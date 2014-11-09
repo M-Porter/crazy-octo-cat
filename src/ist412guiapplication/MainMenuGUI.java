@@ -23,7 +23,9 @@ import javax.swing.tree.TreePath;
  */
 public class MainMenuGUI extends javax.swing.JFrame {
   //  JFrame frame = new JFrame();
-    
+    public static void main(String args[]){
+        MainMenuGUI test = new MainMenuGUI();
+    }
     
 
 
