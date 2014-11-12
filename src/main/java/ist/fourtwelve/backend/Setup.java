@@ -207,6 +207,7 @@ public class Setup {
         test.add("15");
 
         for(int i = 0; i < projects.size(); i++) {
+            info.setJunit(true);
             Project temp = projects.get(i);
             info.setClassList(temp.getMainClassName());
             //For each test Run....

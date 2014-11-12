@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.*;
 import java.lang.ProcessBuilder.Redirect;
 
+import static java.lang.Thread.sleep;
+
 /**
  * The class Compiler compiles the classes that are to be graded
  * @author mporter
@@ -46,8 +48,13 @@ public class Compiler {
             boolean createStudentBinName = new File(classPath).mkdirs(); //studentFiles/bin/@name
             boolean createStudentProjectName = new File(studentPath).mkdirs(); //studentFiles/projectFiles/@name
             Unzipper zip = new Unzipper("./"+zipFile,studentPath);
-
             ProcessBuilder pb = new ProcessBuilder("javac", "-d", classPath, studentPath + "/*.java");
+            if(info.isJunit()){
+                pb = new ProcessBuilder("javac", "-classpath", "junit-4.11.jar","-d", classPath, studentPath + "/*.java");
+            }
+            else {
+                pb = new ProcessBuilder("javac", "-d", classPath, studentPath + "/*.java");
+            }
             System.out.println(pb.command().toString()); //Debug
             File outputFile = new File(outputFileName);// set up output file
             //Not sure what the delete thing does. Clears the file? Makes sure the path is correct? Pretty sure just clears the file though

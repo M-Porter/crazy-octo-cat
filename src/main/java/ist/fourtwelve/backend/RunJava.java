@@ -91,9 +91,10 @@ public class RunJava
                     arg.add(1, "-cp");
 
                     if(info.isJunit()){
-                        arg.add(2,"./java/jar/junit.jar");
-                        arg.add(3,"org.junit.runner.JUnitCore");
-                        arg.add(4,classes);
+                        arg.add(2,"junit-4.11.jar;"+classPath+"/"+name);
+                        //arg.add(3,"org.junit.runner.JUnitCore");
+                        arg.add(3, classPath+"/"+name + "/" +classes);
+                       //arg.add()
                     }
                     else{
                         arg.add(2, classPath+"/"+name);
@@ -126,6 +127,7 @@ public class RunJava
                     pb.redirectInput(Redirect.from(inputFile));
                     pb.redirectErrorStream(true);
                     pb.redirectOutput(Redirect.appendTo(outputFile));
+
 
                     System.out.println("java process arguments: " + pb.command());
 //        start java process
