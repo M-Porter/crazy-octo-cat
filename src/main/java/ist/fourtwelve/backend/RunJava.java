@@ -58,7 +58,7 @@ public class RunJava
     }
     /** 
      * The runJava method is the method that runs the whole process of reading in, checking the student files for errors, running and compiles those files, and writing to an output files
-     * @return          returns success which indicates whether or not the run was successful
+     * @return {@link #success}    returns success which indicates whether or not the run was successful
      */
     public int runJava()
     {

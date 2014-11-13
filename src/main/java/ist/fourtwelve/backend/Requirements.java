@@ -12,7 +12,7 @@ public class Requirements {
     }
     /** keywordUsage is used to determine what keywords were used 
      * 
-     * @return    returns a null value by default
+     * @return {@link null}    returns a null value by default
      */
     public String keywordUsage(){
         return null;
@@ -22,14 +22,14 @@ public class Requirements {
     //print method names...
     /** lineCount keeps track of what line is being read in 
      * 
-     * @return      returns 0 by default
+     * @return {@link null}     returns 0 by default
      */
     public int lineCount(){
         return 0;
     }
     /**
      * hardCoded checks to see if the file or class is hard coded
-     * @return      returns false by default
+     * @return {@link false}     returns false by default
      */
     public boolean hardCoded(){
         return false;

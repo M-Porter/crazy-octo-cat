@@ -40,7 +40,7 @@ public class Compiler {
     }
     /**
      * compileJava is the method that compiles the classes that are to be graded 
-     * @return     the method returns the variable success, which depending on the value of the variable indicates whether or not the compile was successful
+     * @return {@link #success}  the method returns the variable success, which depending on the value of the variable indicates whether or not the compile was successful
      */
     public int compileJava(){
         try {
@@ -109,7 +109,7 @@ public class Compiler {
 
     /**
      * Gets whether or not the program compiled
-     * @return Returns if it compiled or not in integer form.
+     * @return {@link #success} Returns if it compiled or not in integer form.
      */
     public int getSuccess(){return success;}
 

@@ -117,27 +117,49 @@ public class RunInfo {
      * @return {@link #sourcePath} the current run's source path.
      */
     public String getSourcePath(){return sourcePath;}
-    /** getArgsFileName gets the string argsFileName */
+    /** getArgsFileName gets the string argsFileName 
+     * @return {@link #argsFileName} returns the filename
+     */
     public String getArgsFileName(){return argsFileName;}
-    /** getTestInputFileName gets the string testInputFileName */
+    /** getTestInputFileName gets the string testInputFileName 
+     * @return {@link #testInputFileName} returns the test file name
+     */
     public String getTestInputFileName(){return testInputFileName;}
-    /** getZipFile gets the string zipFile */
+    /** getZipFile gets the string zipFile 
+     * @return {@link #zipFile} returns the name of the zip file
+     */
     public String getZipFile(){return zipFile;}
-    /** getClassPath gets the string classPath */
+    /** getClassPath gets the string classPath 
+     * @return {@link #classPath} returns the name of the class location
+     */
     public String getClassPath(){return classPath;}
-    /** getStudentPath gets the string classPath */
+    /** getStudentPath gets the string classPath 
+     * @return {@link #studentPath} returns the location of the student file
+     */
     public String getStudentPath(){return studentPath;}
-    /** getArgs gets the arraylist args */
+    /** getArgs gets the arraylist args 
+     * @return {@link #args} returns the arraylist arguments
+     */
     public ArrayList<String> getArgs(){return args;}
-    /** getClassList gets the string classList */
+    /** getClassList gets the string classList 
+     * @return {@link #classList} returns the classlist
+     */
     public String getClassList(){return classList;}
-    /** getOutputFileName gets the string outputFileName */
+    /** getOutputFileName gets the string outputFileName 
+     * @return {@link #outputFileName} returns the output file name
+     */
     public String getOutputFileName(){return outputFileName;}
-    /** getInputFileStub gets the string getInputFileStub */
+    /** getInputFileStub gets the string getInputFileStub 
+     * @return {@link #inputFileStub} returns the inputfilestub
+     */
     public String getInputFileStub(){return inputFileStub;}
-    /** getFrame gets the JFrame frame */
+    /** getFrame gets the JFrame frame 
+     * @return {@link #frame} returns the main jframe
+     */
     public JFrame getFrame(){return frame;}
-    /** gets the current list of scanner inputs for the run */
+    /** gets the current list of scanner inputs for the run 
+     * @return {@link #scannerInputs}
+     */
     public ArrayList<String> getScannerInputs(){return scannerInputs;}
     /**
      * {@link #isJunit} tells if this run is a junit test or not

@@ -32,7 +32,7 @@ public class TestTools
      * 
      * @param cwd
      * @param destinationPath
-     * @return  returns the File nwd
+     * @return  {@link #nwd}  returns the File nwd
      */
     public static File cd(File cwd, String destinationPath)
     {
@@ -123,7 +123,7 @@ public class TestTools
     /**
      * 
      * @param line
-     * @return returns the object tokens
+     * @return {@link #tokens}  returns the object tokens
      */
     public static List<String> parseLine(String line)
     {

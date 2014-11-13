@@ -41,7 +41,7 @@ public class ClassChecker {
  * @param params    params is the arraylist of parameters that are being checked
  * @param lineNo    lineNo is a counter for the line number in the class that is being checked
  * @param e         e is a string that holds the sequence of code that the method wants to scan for
- * @return          returns the boolean isGtg which checks if the file meets the parameters       
+ * @return {@link #itsGtg}         returns the boolean isGtg which checks if the file meets the parameters       
  */
     public boolean checkForUsages(ArrayList<String> params) {
         for(String e : params) {
@@ -64,7 +64,7 @@ public class ClassChecker {
  * determineParameterFromLine figures out the type of parameter that needs to be set
  * @param singleLine            singleLine is a parameter that takes in a line of code from a class
  * @param parameterReturnCode   the parameterReturnCode is set to a value depending what type of parameter it is
- * @return                      the parameterReturnCode is returned at the end of the method 
+ * @return {@link #parameterReturnCode} the parameterReturnCode is returned at the end of the method 
  */
     public int determineParameterFromLine(String singleLine) {
 

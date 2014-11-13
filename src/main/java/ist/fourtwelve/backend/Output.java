@@ -20,15 +20,21 @@ public class Output {
         //meant to be empty
     }
     //accessors
-    /** getOutputString gets the object outputString */
+    /** getOutputString gets the object outputString 
+     * @return {@link #outputString} returns the output string
+     */
     public String getOutputString(){
          return this.outputString;
     }
-    /** getDidCompile gets the object didCompile */
+    /** getDidCompile gets the object didCompile 
+     * @return {@link #didCompile} returns the boolean that indicates whether or not the files compiled
+     */
     public boolean getDidCompile(){
         return this.didCompile;
     }
-    /** getDidRun gets the object didRun */
+    /** getDidRun gets the object didRun 
+     * @return {@link #didRun} returns the boolean that indicates whether or not the run was successful
+     */
     public boolean getDidRun(){
         return this.didRun;
     }

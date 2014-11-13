@@ -290,7 +290,9 @@ public class Setup {
     public void setOutput(Output x){this.output = x;}
     /** setFrame sets the object frame to x */
     public void setFrame(JFrame x){frame = x;}
-    /** getOutput gets the object output */
+    /** getOutput gets the object output 
+     * @return {@link #output} returns the output
+     */
     public Output getOutput(){return this.output;}
 
 }
