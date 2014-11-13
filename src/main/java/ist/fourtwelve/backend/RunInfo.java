@@ -166,7 +166,9 @@ public class RunInfo {
      * @return {@link #isJunit} if the run is a junit test or not.
      */
     public boolean isJunit(){return isJunit;}
+
     /** sets up if the run is a junit test or not */
+    
     public void setJunit(boolean x){this.isJunit = x;}
     /** sets the current scanner inputs for this run */
     public void setScannerInputs(ArrayList<String> x){this.scannerInputs = x;}

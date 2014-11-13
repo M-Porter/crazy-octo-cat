@@ -205,20 +205,24 @@ public class Setup {
         test.add("5");
         test.add("10");
         test.add("15");
+        test.add("15");
+        test.add("15");
+        test.add("15");
 
         for(int i = 0; i < projects.size(); i++) {
-            info.setJunit(true);
+
             Project temp = projects.get(i);
             info.setClassList(temp.getMainClassName());
             //For each test Run....
             for(int j = 0; j < temp.getTestRuns().size(); j++){
                 //Setup RunInfo object.
-                info.setStudentPath(temp.getSrcDir());
-                info.setClassPath(temp.getSrcDir());
+                info.setJunit(true);//temp.getTestRuns().get(j).getIsJunit()
+                info.setStudentPath(temp.getSrcDir());//TODO: See below it edit it accordingly.
+                info.setClassPath(temp.getSrcDir()); //Todo: See below If the gui supports it, add in the class path handling and change in the runInfo to accept the path and not mutate it.
                 info.setZipFile(temp.getSrcDir());//TODO: Replace this with something more concrete.
-                info.setArgs(test);
+                info.setArgs(test);//temp.getTestRuns().get(j).getCmdArgs()
                 info.setScannerInputs(temp.getTestRuns().get(j).getScannerInputs());
-                info.setInputFileStub(info.getStudentPath());
+                info.setInputFileStub(info.getStudentPath());//TODO:See above, dynamic editing needs to be supported by the gui.
                 info.setFrame(this.frame);
                 if(temp.getTestRuns().size() > 1){
                     //IF there more than one test run for a project... do more stuff... else...
