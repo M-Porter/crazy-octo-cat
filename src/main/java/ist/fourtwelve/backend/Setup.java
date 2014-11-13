@@ -62,7 +62,7 @@ public class Setup {
             info.setClassPath(project.getSrcDir());
             info.setZipFile(project.getSrcDir());//TODO: Replace this with something more concrete.
             info.setArgs(test);
-            info.setScannerInputs(project.getTestRuns().get(j).getInputs());
+            info.setScannerInputs(project.getTestRuns().get(j).getScannerInputs());
             info.setInputFileStub(info.getStudentPath());
             info.setFrame(this.frame);
             if(project.getTestRuns().size() > 1){
@@ -106,7 +106,7 @@ public class Setup {
             info.setClassPath(project.getSrcDir());
             info.setZipFile(project.getSrcDir());//TODO: Replace this with something more concrete.
             info.setArgs(test);
-            info.setScannerInputs(project.getTestRuns().get(j).getInputs());
+            info.setScannerInputs(project.getTestRuns().get(j).getScannerInputs());
             info.setInputFileStub(info.getStudentPath());
             info.setFrame(this.frame);
             if(project.getTestRuns().size() > 1){
@@ -167,7 +167,7 @@ public class Setup {
                 info.setClassPath(temp.getSrcDir());
                 info.setZipFile(temp.getSrcDir());//TODO: Replace this with something more concrete.
                 info.setArgs(test);
-                info.setScannerInputs(temp.getTestRuns().get(j).getInputs());
+                info.setScannerInputs(temp.getTestRuns().get(j).getScannerInputs());
                 info.setInputFileStub(info.getStudentPath());
                 info.setFrame(this.frame);
                 if (temp.getTestRuns().size() > 1) {
@@ -217,7 +217,7 @@ public class Setup {
                 info.setClassPath(temp.getSrcDir());
                 info.setZipFile(temp.getSrcDir());//TODO: Replace this with something more concrete.
                 info.setArgs(test);
-                info.setScannerInputs(temp.getTestRuns().get(j).getInputs());
+                info.setScannerInputs(temp.getTestRuns().get(j).getScannerInputs());
                 info.setInputFileStub(info.getStudentPath());
                 info.setFrame(this.frame);
                 if(temp.getTestRuns().size() > 1){

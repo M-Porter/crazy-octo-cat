@@ -309,7 +309,7 @@ public class TestProjectGenerationView extends javax.swing.JFrame {
 
         outputArea.setEditable(false);
         outputArea.setColumns(20);
-        outputArea.setRows(5);
+        outputArea.setRows(25);
         jScrollPane2.setViewportView(outputArea);
 
         jLabel6.setText("Output Field:");
@@ -484,10 +484,10 @@ public class TestProjectGenerationView extends javax.swing.JFrame {
 
         TestRun thisRun;
         if(expectOutField.getText().equals("")){
-            thisRun = new TestRun(testNameField.getText(),this.generator.getParamList());
+            thisRun = new TestRun(testNameField.getText(),this.generator.getParamList(),true);
         }
         else{
-            thisRun = new TestRun(testNameField.getText(),this.generator.getParamList(),expectOutField.getText());
+            thisRun = new TestRun(testNameField.getText(),this.generator.getParamList(),true);
         }
         expectOutField.setText("");
         this.generator.getTestRunsList().add(thisRun);
@@ -542,8 +542,8 @@ public class TestProjectGenerationView extends javax.swing.JFrame {
                 projListTextArea.append("Test Name: " +this.generator.getProjList().get(i).getTestRuns().get(j).getName());
 
                 projListTextArea.append("\nInput(s): \n");
-                for(int k = 0; k < this.generator.getProjList().get(i).getTestRuns().get(j).getInputs().size(); k++){
-                    projListTextArea.append(this.generator.getProjList().get(i).getTestRuns().get(j).getInputs().get(k)+"\n");
+                for(int k = 0; k < this.generator.getProjList().get(i).getTestRuns().get(j).getScannerInputs().size(); k++){
+                    projListTextArea.append(this.generator.getProjList().get(i).getTestRuns().get(j).getScannerInputs().get(k)+"\n");
                 }
 
             }

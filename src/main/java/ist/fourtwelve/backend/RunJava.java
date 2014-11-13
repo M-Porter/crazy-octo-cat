@@ -90,10 +90,11 @@ public class RunJava
                     arg.add(0, "java");
                     arg.add(1, "-cp");
 
-                    if(info.isJunit()){
-                        arg.add(2,"junit-4.11.jar;"+classPath+"/"+name);
-                        //arg.add(3,"org.junit.runner.JUnitCore");
-                        arg.add(3, classPath+"/"+name + "/" +classes);
+                   if(info.isJunit()){
+                        arg.add(2,classPath+"/"+name + ";junit-4.11.jar;hamcrest-core-1.3.jar"); //ProgramJUnitTest
+                        arg.add(3,"org.junit.runner.JUnitCore"); //junit.textui.TestRunner
+                        arg.add(4, /*classPath+"/"+name + "/" +*/classes);
+                        //arg.add(4,"testConcatenate2");
                        //arg.add()
                     }
                     else{
@@ -127,6 +128,7 @@ public class RunJava
                     pb.redirectInput(Redirect.from(inputFile));
                     pb.redirectErrorStream(true);
                     pb.redirectOutput(Redirect.appendTo(outputFile));
+
 
 
                     System.out.println("java process arguments: " + pb.command());

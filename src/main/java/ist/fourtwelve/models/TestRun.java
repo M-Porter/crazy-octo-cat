@@ -12,7 +12,9 @@ public class TestRun {
     /**Descriptive name of this test */
     private String testName;
     /**ArrayList of inputs to test*/
-    private ArrayList<String> testInputs;
+    private ArrayList<String> scannerInputs;
+    private ArrayList<String> cmdArgs;
+    private boolean isJUnit;
     /**boolean indicating run success*/
     private boolean runSuccess;
     /**Expected output stores an output value that indicates a successful run*/
@@ -22,21 +24,56 @@ public class TestRun {
     /**
      * Takes name and a list of all the testInputs to run
      * @param name Given name of the test run
-     * @param inputs List of inputs that the test should have
+     * @param scannerInputs List of inputs that the test should have
+     * @param JUnit
      */
-    public TestRun (String name, ArrayList<String> inputs){
-        this.testName   = name;
-        this.testInputs = new ArrayList<String>(inputs);
+    public TestRun (String name, ArrayList<String> scannerInputs, boolean JUnit){
+        this.testName       = name;
+        this.scannerInputs  = new ArrayList<String>(scannerInputs);
+        this.isJUnit        = JUnit;
     }
     /**
      * Takes name and a list of all the test inputs to run, plus expected output
      * @param name Given name of the test run
-     * @param inputs List of inputs that the test should have
+     * @param cmdArgs List of inputs that the test should have
      * @param expectOut Given expected output of the test
      */
-     public TestRun (String name, ArrayList<String> inputs, String expectOut){
+     public TestRun (String name, ArrayList<String> cmdArgs, boolean JUnit, String expectOut){
         this.testName       = name;
-        this.testInputs = new ArrayList<String>(inputs);
+        this.cmdArgs        = new ArrayList<String>(cmdArgs);
+        this.isJUnit        = JUnit;
+        this.expectedOutput = expectOut;
+    }
+
+    /**
+     *
+     * @param name
+     * @param scannerInputs
+     * @param cmdArgs
+     * @param JUnit
+     */
+    public TestRun (String name, ArrayList<String> scannerInputs, ArrayList<String> cmdArgs, boolean JUnit){
+        this.testName       = name;
+        this.scannerInputs  = new ArrayList<String>(scannerInputs);
+        this.cmdArgs        = new ArrayList<String>(cmdArgs);
+        this.isJUnit        = JUnit;
+
+    }
+
+    /**
+     *
+     * @param name
+     * @param scannerInputs
+     * @param cmdArgs
+     * @param JUnit
+     * @param expectOut
+     */
+    //takes name and a list of all the test inputs and command Args to run, plus expected output
+    public TestRun (String name, ArrayList<String> scannerInputs, ArrayList<String> cmdArgs, boolean JUnit, String expectOut){
+        this.testName       = name;
+        this.scannerInputs  = new ArrayList<String>(scannerInputs);
+        this.cmdArgs        = new ArrayList<String>(cmdArgs);
+        this.isJUnit        = JUnit;
         this.expectedOutput = expectOut;
     }
     /**
@@ -65,8 +102,10 @@ public class TestRun {
      * Access to this tests set of inputs to store them and to retrieve at runtime
      * @return Returns the given set of test inputs of this test run.
      */
-    public ArrayList<String> getInputs(){return testInputs;}
-    /**
+    public ArrayList<String> getScannerInputs(){return scannerInputs;}
+    public ArrayList<String> getCmdArgs(){return cmdArgs;}
+    public boolean getIsJunit(){return isJUnit;}
+     /**
      * Use to report whether the test was a success or failure
      * @param result Sets the test run with a specific boolean if it passed or failed..
      */
