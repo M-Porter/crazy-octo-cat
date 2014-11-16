@@ -7,7 +7,7 @@ package ist.fourtwelve.backend;
 public class Output {
     //TODO: Compile run output. needs to be added here in some form.
     /** outputString contains the output of a file */
-    private String outputString;
+    private String outputString = "";
     /** didCompile is a boolean that checks if a file compiled */
     private boolean didCompile;
     /** didRun is a boolean that checks if a process ran correctly */

@@ -93,9 +93,7 @@ public class RunJava
                    if(info.isJunit()){
                         arg.add(2,classPath+"/"+name + ";junit-4.11.jar;hamcrest-core-1.3.jar"); //ProgramJUnitTest
                         arg.add(3,"org.junit.runner.JUnitCore"); //junit.textui.TestRunner
-                        arg.add(4, /*classPath+"/"+name + "/" +*/classes);
-                        //arg.add(4,"testConcatenate2");
-                       //arg.add()
+                        arg.add(4,classes);
                     }
                     else{
                         arg.add(2, classPath+"/"+name);

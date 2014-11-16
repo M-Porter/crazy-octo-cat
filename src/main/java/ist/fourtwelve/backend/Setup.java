@@ -31,6 +31,10 @@ public class Setup {
     private JFrame frame;
     /** output object is instaniated */
     private Output output = new Output();
+    /** The run number that is currently going on */
+    private int runNumber = 0;
+    /** The current compiled/running project */
+    private int projectNumber = 0;
     //TODO: Change this method to something concrete and not using test methods.
     public Setup(){
 
@@ -211,6 +215,7 @@ public class Setup {
 
         for(int i = 0; i < projects.size(); i++) {
 
+            projectNumber++;
             Project temp = projects.get(i);
             info.setClassList(temp.getMainClassName());
             //For each test Run....
@@ -220,7 +225,12 @@ public class Setup {
                 info.setStudentPath(temp.getSrcDir());//TODO: See below it edit it accordingly.
                 info.setClassPath(temp.getSrcDir()); //Todo: See below If the gui supports it, add in the class path handling and change in the runInfo to accept the path and not mutate it.
                 info.setZipFile(temp.getSrcDir());//TODO: Replace this with something more concrete.
-                info.setArgs(test);//temp.getTestRuns().get(j).getCmdArgs()
+                if(temp.getTestRuns().get(j) == null){ //Remove if statement if
+                    info.setArgs(test);//temp.getTestRuns().get(j).getCmdArgs()
+                }
+                else{
+                    info.setArgs(temp.getTestRuns().get(j).getCmdArgs());
+                }
                 info.setScannerInputs(temp.getTestRuns().get(j).getScannerInputs());
                 info.setInputFileStub(info.getStudentPath());//TODO:See above, dynamic editing needs to be supported by the gui.
                 info.setFrame(this.frame);
@@ -264,6 +274,7 @@ public class Setup {
                     output.setDidRun(y);
                     projects.get(i).getTestRuns().get(j).reportRunSuccess(y); //Untested
                 }
+                runNumber++;
                 setGuiOutput();
 
             }
@@ -287,8 +298,8 @@ public class Setup {
         {
             tempString += myScanner.nextLine() + "\n";
         }
-        x.setOutputArea(tempString);
-        output.setOutputString(tempString);
+        output.setOutputString(output.getOutputString() + "Run Number " + runNumber + " Project Numeber " + projectNumber + "\n ------------------------- \n" + tempString);
+        x.setOutputArea(output.getOutputString());
     }
     /** setOutput sets the object output to x */
     public void setOutput(Output x){this.output = x;}
