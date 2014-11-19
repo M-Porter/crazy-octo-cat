@@ -26,6 +26,7 @@ public class Unzipper {
     
     private String argFile;
     private String outputDir;
+    private String firstDir;
 
     /**
      * Constructor used to simply unzip a file.
@@ -91,9 +92,12 @@ public class Unzipper {
             else {
                 String dir = currentEntryName.substring(0, currentEntryName.lastIndexOf('/'));
                 File temp = new File(dir);
+                firstDir = dir;
                 temp.mkdirs();
             }
             System.out.println("Zip Entry =" + currentEntryName);
+
+
             long size = zipEntry.getSize();
             long compressedSize = zipEntry.getCompressedSize();
 
@@ -175,6 +179,7 @@ public class Unzipper {
             //file handles for the input and output folders to be used in creating paths
             File inputFolder = new File(inputFolderStr);
             File outputFolder = new File(this.outputDir);
+            File[] temp = inputFolder.listFiles();
 
             //create the output directory
             outputFolder.mkdirs();
@@ -183,6 +188,7 @@ public class Unzipper {
             if (inputFolder.isDirectory()){
                 for (File c : inputFolder.listFiles()){
                     Path inPath = FileSystems.getDefault().getPath(inputFolderStr, c.getName());
+                    System.out.println("Input Folder is:  " + inPath + " Input folder str = " + inputFolderStr );
                     Path outPath = FileSystems.getDefault().getPath(this.outputDir, c.getName());
                     Files.copy(inPath, outPath, REPLACE_EXISTING);
 
@@ -190,20 +196,21 @@ public class Unzipper {
                     System.out.println("outpath: "+outPath);
                     System.out.println(outPath.toString().substring(0,outPath.toString().length() - 4));
                     if (outPath.toString().endsWith(".zip")) { //Attempts to unzip if there is a directory.
-                        Unzipper innerUnzipper = new Unzipper(outPath.toString(), outPath.toString().substring(0,outPath.toString().length()-4));
+                        Unzipper innerUnzipper = new Unzipper(outPath.toString(), "./" + outPath.toString().substring(0,outPath.toString().length()-4));
                     }
                 }
             }else{
                 //TODO: path of the first folder in the zip folder must be named the same as the folder itself.
-                Path inPath = FileSystems.getDefault().getPath("", inputFolder.getName());
-                Path outPath = FileSystems.getDefault().getPath(this.outputDir, inputFolderStr);
+                Path inPath = FileSystems.getDefault().getPath("", firstDir); //firstDir
+                System.out.println("Input Folder is:  " + inPath + " Input folder str = " + inputFolderStr);
+                Path outPath = FileSystems.getDefault().getPath(this.outputDir, inputFolderStr); //firstDir
                 Files.copy(inPath, outPath, REPLACE_EXISTING);
 
                 System.out.println("inpath: "+inPath);
                 System.out.println("outpath: "+outPath);
                 System.out.println(outPath.toString().substring(0,outPath.toString().length() - 4));
                 if (outPath.toString().endsWith(".zip")) { //Attempts to unzip if there is a directory.
-                    Unzipper innerUnzipper = new Unzipper(outPath.toString(), outPath.toString().substring(0,outPath.toString().length() - 4));
+                    Unzipper innerUnzipper = new Unzipper(outPath.toString(), "./" + outPath.toString().substring(0,outPath.toString().length() - 4));
                 }
             }
             //deletes the initial unzipped folder

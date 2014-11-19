@@ -201,5 +201,5 @@ public class RunInfo {
     /** setTestInputFileName sets the string testInputFileName to x */
     public void setTestInputFileName(String x){this.testInputFileName = x;}
     /** setZipFile sets the string zipFile to x */
-    public void setZipFile (String x){this.zipFile = /*x*/  "blank3.zip";} //TESTING PURPOSES, ISSUE.
+    public void setZipFile (String x){this.zipFile = /*x*/  "blank.zip";} //TESTING PURPOSES, ISSUE.
 }//RunInfo
