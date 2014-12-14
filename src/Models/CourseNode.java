@@ -15,8 +15,9 @@ public class CourseNode extends DefaultMutableTreeNode{
     private StudentNodeList theStudentNodeList;
     protected Course theCourse;
     
-    public CourseNode(){
-        
+    public CourseNode(Course theCourse){
+        super(theCourse.getCourseID());
+        this.theCourse = theCourse;
     }
     
     public StudentNodeList getStudentNodes(){

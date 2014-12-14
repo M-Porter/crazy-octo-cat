@@ -239,24 +239,30 @@ public class RunSetupUI extends javax.swing.JFrame {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode)
                            courseTree.getLastSelectedPathComponent();
         
-        Object nodeInfo = node.getUserObject();
+        System.out.println("You are adding a " + node.getClass().toString());
+        
+       
+        
+        //Object nodeInfo = node.getUserObject();
         /*if (node == null) return;
         else{
             listModel.addElement(nodeInfo);
         }*/
         if (node == null) return;
-        else if(nodeInfo.getClass().isInstance(theProjectNode)){
-            listModel.addElement(nodeInfo);
+        
+        
+        else if(node instanceof ProjectNode){
+            listModel.addElement(node);
         }
-        else if(nodeInfo.getClass().isInstance(theCourseNode)){
+        else if(node instanceof CourseNode){
             //Pull list of project types from ProjectComboBox   
-            theCourseNode.setUserObject(nodeInfo);
+            theCourseNode.setUserObject(node);
             String value = projectComboBox.getSelectedItem().toString();
             for(int i = 0; i < theCourseNode.getStudentNodes().getStudentNodeList().size(); i++)
             {
-                for(int j=0; j<theCourseNode.getStudentNodes().getStudentNodeList().get(i).getStudent().getStudentProject().size(); j++){
-                    if(value.equals(theCourseNode.getStudentNodes().getStudentNodeList().get(i).getStudent().getStudentProject().get(j).getName())){
-                        listModel.addElement(theCourseNode.getStudentNodes().getStudentNodeList().get(i).getStudent().getStudentProject().get(j).getName());
+                for(int j=0; j<theCourseNode.getStudentNodes().getStudentNodeList().get(i).getStudent().getProjectList().size(); j++){
+                    if(value.equals(theCourseNode.getStudentNodes().getStudentNodeList().get(i).getStudent().getProjectList().get(j).getName())){
+                        listModel.addElement(theCourseNode.getStudentNodes().getStudentNodeList().get(i).getStudent().getProjectList().get(j).getName());
                     }    
                 }
                 

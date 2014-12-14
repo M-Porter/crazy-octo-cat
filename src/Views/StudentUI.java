@@ -245,7 +245,7 @@ public class StudentUI extends javax.swing.JFrame{
         if (browseField.getText().isEmpty()){
             String firstName = firstNameField.getText();
             String lastName = lastNameField.getText();
-            int userId = Integer.parseInt(userIdField.getText());
+            String userId = userIdField.getText();
             PersistentDataModelCntl.getPDMCntl().getPDM().getInstructor().getCourseById(theCourseId).getStudentList().add(new Student(firstName, lastName, userId));
         }
         
@@ -265,7 +265,7 @@ public class StudentUI extends javax.swing.JFrame{
                     System.out.println(fullName[0]);
                     System.out.println(fullName[1]);
                     stringBuffer.append("\n");
-                    PersistentDataModelCntl.getPDMCntl().getPDM().getInstructor().getCourseById(theCourseId).getStudentList().add(new Student(fullName[0], fullName[1], id));
+                    PersistentDataModelCntl.getPDMCntl().getPDM().getInstructor().getCourseById(theCourseId).getStudentList().add(new Student(fullName[0], fullName[1], "test"));
                 }
                 fileReader.close();
                 System.out.println("Contents of file");
@@ -274,6 +274,11 @@ public class StudentUI extends javax.swing.JFrame{
                 e.printStackTrace();
             }
         }
+        
+        // Refactor the JTree on the Main Menu
+        theMainMenuCntl.getMainMenuUI().populateTree();
+        theMainMenuCntl.getMainMenuUI().repaint();
+        PersistentDataModelCntl.getPDMCntl().writePDMFile();
     }//GEN-LAST:event_addButtonActionPerformed
 
     

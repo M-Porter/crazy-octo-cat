@@ -15,7 +15,7 @@ public class PersistentDataModel implements Serializable{
     
     
    public Instructor theInstructor;
-   Project theProjectTemplates;
+   public ArrayList<Project> theProjectTemplates;
     
     public PersistentDataModel(){
         
@@ -23,5 +23,14 @@ public class PersistentDataModel implements Serializable{
     public Instructor getInstructor(){
         return theInstructor;
     }
-    
+    public void setInstructor(Instructor newInstruct){
+        this.theInstructor = newInstruct;
+    }
+    public ArrayList<Project> getProjectTemplateList(){
+        return theProjectTemplates;
+    }
+    public void setProjectTemplateList(ArrayList<Project> newProjectList){
+        this.theProjectTemplates = newProjectList;
+    }
 }
+

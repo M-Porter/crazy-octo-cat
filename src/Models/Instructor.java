@@ -79,6 +79,12 @@ public class Instructor implements Serializable{
         courseList.add(new Course(this, "IST 412"));
         courseList.add(new Course(this, "IST 140"));
         courseList.add(new Course(this, "IST 297J"));
+        
+        // Print a list of the test courses added to the console
+        System.out.println("Test courses added: ");
+        for (int i = 0; i < courseList.size(); i++){
+            System.out.println(courseList.get(i).getCourseID());
+        }
     }
     
     public Course getCourseById(String courseId){

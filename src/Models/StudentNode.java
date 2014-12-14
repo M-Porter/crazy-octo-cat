@@ -13,8 +13,9 @@ public class StudentNode extends DefaultMutableTreeNode{
     
     protected Student theStudent;
     
-    public StudentNode(){
-        
+    public StudentNode(Student theStudent){
+        super(theStudent.getFirstName().charAt(0)+theStudent.getLastName());
+        this.theStudent = theStudent;
     }
     
     public Student getStudent(){

@@ -32,6 +32,10 @@ public class Project {
     private boolean compileSuccess;
 
 // ** CONSTRUCTORS **
+    public Project(String name){
+        this.projectName = name;
+    }
+    
     public Project(String name, String srcPath, ArrayList<TestRun> tests){
         this.projectName    = name;
         this.srcDirPath     = srcPath;

@@ -27,11 +27,12 @@ public class Course {
         theStudentList = new ArrayList();
     }
     
+    
         public Course(String courseID, String semester, String semesterYear) {
-
         this.courseID = courseID;
         this.semester = semester;
         this.semesterYear = semesterYear;
+        this.theStudentList = new ArrayList();
 
     }
     
@@ -69,7 +70,18 @@ public class Course {
         theStudentList.remove(studentID);
     }
     
-    
+    public void createTestStudentList(){
+        theStudentList.add(new Student("Test", "Student", "abc1"));
+        theStudentList.add(new Student("Test", "Student", "abc2"));
+        theStudentList.add(new Student("Test", "Student", "abc3"));
+        
+        // Print a list of test students to the console
+        System.out.println("Test students added: ");
+        for (int i = 0; i < theStudentList.size(); i++){
+            System.out.println(theStudentList.get(i).getLastName());
+        }
+        
+    }
     
 
 }

@@ -14,8 +14,9 @@ public class ProjectNode extends DefaultMutableTreeNode{
     
   
     protected Project theProject;  
-    public ProjectNode(){
-        
+    public ProjectNode(Project theProject){
+        super(theProject.getName());
+        this.theProject = theProject;
     }
 
 }

@@ -12,7 +12,7 @@ import Models.StudentList;
 import Views.StudentUI;
 import Views.MainMenuUI;
 import Views.CourseCreationUI;
-import Views.ProjectTemplateManagerGUI;
+import Views.ProjectTemplateManagerUI;
 import Views.RunSetupUI;
 import javax.swing.JTree;
 
@@ -25,7 +25,7 @@ public class MainMenuCntl {
     // GUI variables
     private MainMenuUI theMainMenuUI;
     private CourseCreationUI theCourseCreationUI;
-    private ProjectTemplateManagerGUI theProjectTemplateUI;
+    private ProjectTemplateManagerUI theProjectTemplateUI;
     private StudentUI theStudentUI;
     private RunSetupUI theRunSetupUI;
     
@@ -42,6 +42,10 @@ public class MainMenuCntl {
     
     public StudentList getStudentList(){
         return theStudentList;
+    }
+    
+    public MainMenuUI getMainMenuUI(){
+        return theMainMenuUI;
     }
     
     // Funtion to refire the MainMenuGUI when there are updaets
@@ -61,6 +65,9 @@ public class MainMenuCntl {
     
     public void getStudentUI(){
         theStudentUI = new StudentUI(this);
+    }
+    public void getProjectTemplateUI(){
+        theProjectTemplateUI = new ProjectTemplateManagerUI();
     }
    
 }
