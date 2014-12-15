@@ -226,16 +226,16 @@ public class Setup {
             //For each test Run....
             for(int j = 0; j < temp.getTestRuns().size(); j++){
                 //Setup RunInfo object.
-                info.setJunit(true);//temp.getTestRuns().get(j).getIsJunit()
+                //info.setJunit(true);//temp.getTestRuns().get(j).getIsJunit()
                 info.setStudentPath(temp.getSrcDir());//TODO: See below it edit it accordingly.
                 info.setClassPath(temp.getSrcDir()); //Todo: See below If the gui supports it, add in the class path handling and change in the runInfo to accept the path and not mutate it.
                 info.setZipFile(temp.getSrcDir());//TODO: Replace this with something more concrete.
-                if(temp.getTestRuns().get(j) == null){ //Remove if statement if
+                //if(temp.getTestRuns().get(j) == null){ //Remove if statement if
                     info.setArgs(test);//temp.getTestRuns().get(j).getCmdArgs()
-                }
-                else{
-                    info.setArgs(temp.getTestRuns().get(j).getCmdArgs());
-                }
+                //}
+               // else{
+              //      info.setArgs(temp.getTestRuns().get(j).getCmdArgs());
+               // }
                 info.setScannerInputs(temp.getTestRuns().get(j).getScannerInputs());
                 info.setInputFileStub(info.getStudentPath());//TODO:See above, dynamic editing needs to be supported by the gui.
                 info.setFrame(this.frame);
