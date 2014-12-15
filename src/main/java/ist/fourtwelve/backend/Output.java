@@ -6,49 +6,62 @@ package ist.fourtwelve.backend;
  */
 public class Output {
     //TODO: Compile run output. needs to be added here in some form.
-    /** outputString contains the output of a file */
+    /** String of the run and compile output information. */
     private String outputString = "";
-    /** didCompile is a boolean that checks if a file compiled */
+    /** Boolean that checks if a file compiled */
     private boolean didCompile;
-    /** didRun is a boolean that checks if a process ran correctly */
+    /** Boolean that checks if a process ran correctly */
     private boolean didRun;
 
     /** 
-     * constructor Output is meant to be empty
+     * Nothing of importance.
      */
     public Output(){
         //meant to be empty
     }
-    //accessors
-    /** getOutputString gets the object outputString 
+    /**
+     * Gets the ouput for the compile or run.
      * @return {@link #outputString} returns the output string
      */
     public String getOutputString(){
          return this.outputString;
     }
-    /** getDidCompile gets the object didCompile 
-     * @return {@link #didCompile} returns the boolean that indicates whether or not the files compiled
+
+    /**
+     * Tells if the run compiled correctly
+     * @return {@link #didCompile} Where or not the program compiled.
      */
     public boolean getDidCompile(){
         return this.didCompile;
     }
-    /** getDidRun gets the object didRun 
-     * @return {@link #didRun} returns the boolean that indicates whether or not the run was successful
+    /**
+     * Tells if the run ran correctly
+     * @return {@link #didRun} Whether or not the program ran.
      */
     public boolean getDidRun(){
         return this.didRun;
     }
 
-    //mutators
-    /** setOutputString sets the object outputString */
+    /**
+     * Sets the string that is the output from running and compiling
+     * @param passedOutputString The string related to what output happened for the compile/run.
+     */
     public void setOutputString(String passedOutputString){
         this.outputString = passedOutputString;
     }
-    /** setDidCompile sets the object didCompile */
+
+    /**
+     * Sets if the programs compiled correctly.
+     * @param passedDidCompile Boolean of the project compiling
+     */
     public void setDidCompile(boolean passedDidCompile){
         this.didCompile = passedDidCompile;
     }
-    /** setDidRun sets the object didRun */
+
+    /**
+     * Sets if the program ran correctly
+     * @param passedDidRun Passed arg of if the program ran correctly.
+     */
     public void setDidRun(boolean passedDidRun){
         this.didRun = passedDidRun;
     }

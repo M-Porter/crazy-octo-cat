@@ -50,10 +50,14 @@ public class RunInfo {
     /** outputFileName is the name of the output file */
     private String outputFileName;
     /** args is an arraylist of arguments */
-    private ArrayList<String> args; //scanner inputs atm
+    private ArrayList<String> args;
+    /** List of Scanner Inputs used to run the code*/
     private ArrayList<String> scannerInputs;
+    /** Current main class name, could be changed to a list*/
     private String classList; //class name for the project
+    /** Main frame used to direct the output */
     private JFrame frame;
+    /** Used to tell if the run is a junit run or not */
     private boolean isJunit;
     /**
     Basic constructor, Assumes nothing special and is used for testing purposes. Defaults to above, testing purposes only.
@@ -66,7 +70,7 @@ public class RunInfo {
         classList = "ArrayLoops";
     }//RunInfo()
     /**
-    * Full Constructor. For when you want to completely redo the configuration, or want to test a configuration
+    * Full Constructor. For when you want to completely redo the configuration, or want to test a configuration, without using the methods
     * @param sName Student Name for the specific directory
     * @param sHandle Student Handle for grading purposes, otherwise unused atm
     * @param cName Classname, Unused atm, but will be used to setup an additional directory to separate classes from each other.
@@ -117,48 +121,59 @@ public class RunInfo {
      * @return {@link #sourcePath} the current run's source path.
      */
     public String getSourcePath(){return sourcePath;}
-    /** getArgsFileName gets the string argsFileName 
+    /**
+     * getArgsFileName gets the string argsFileName
      * @return {@link #argsFileName} returns the filename
      */
     public String getArgsFileName(){return argsFileName;}
-    /** getTestInputFileName gets the string testInputFileName 
+    /**
+     * getTestInputFileName gets the string testInputFileName
      * @return {@link #testInputFileName} returns the test file name
      */
     public String getTestInputFileName(){return testInputFileName;}
-    /** getZipFile gets the string zipFile 
+    /**
+     * getZipFile gets the string zipFile
      * @return {@link #zipFile} returns the name of the zip file
      */
     public String getZipFile(){return zipFile;}
-    /** getClassPath gets the string classPath 
+    /**
+     * getClassPath gets the string classPath
      * @return {@link #classPath} returns the name of the class location
      */
     public String getClassPath(){return classPath;}
-    /** getStudentPath gets the string classPath 
+    /**
+     * getStudentPath gets the string classPath
      * @return {@link #studentPath} returns the location of the student file
      */
     public String getStudentPath(){return studentPath;}
-    /** getArgs gets the arraylist args 
+    /**
+     * getArgs gets the arraylist args
      * @return {@link #args} returns the arraylist arguments
      */
     public ArrayList<String> getArgs(){return args;}
-    /** getClassList gets the string classList 
+    /**
+     * getClassList gets the string classList
      * @return {@link #classList} returns the classlist
      */
     public String getClassList(){return classList;}
-    /** getOutputFileName gets the string outputFileName 
+    /**
+     * getOutputFileName gets the string outputFileName
      * @return {@link #outputFileName} returns the output file name
      */
     public String getOutputFileName(){return outputFileName;}
-    /** getInputFileStub gets the string getInputFileStub 
+    /**
+     * getInputFileStub gets the string getInputFileStub
      * @return {@link #inputFileStub} returns the inputfilestub
      */
     public String getInputFileStub(){return inputFileStub;}
-    /** getFrame gets the JFrame frame 
-     * @return {@link #frame} returns the main jframe
+    /**
+     * getFrame gets the JFrame frame
+     * @return {@link #frame} The current JFrame
      */
     public JFrame getFrame(){return frame;}
-    /** gets the current list of scanner inputs for the run 
-     * @return {@link #scannerInputs}
+    /**
+     * gets the current list of scanner inputs for the run
+     * @return {@link #scannerInputs} The current list of scanner inputs.
      */
     public ArrayList<String> getScannerInputs(){return scannerInputs;}
     /**
@@ -167,39 +182,87 @@ public class RunInfo {
      */
     public boolean isJunit(){return isJunit;}
 
-    /** sets up if the run is a junit test or not */
-    
+    /**
+     * Sets up if the run is a junit test or not
+     * @param x If it is a junit test, or not.
+     */
     public void setJunit(boolean x){this.isJunit = x;}
-    /** sets the current scanner inputs for this run */
+
+    /**
+     * Sets the current scanner inputs for this run
+     * @param x Given scanner inputs used for the run.
+     */
     public void setScannerInputs(ArrayList<String> x){this.scannerInputs = x;}
-    /** setFrame sets the frame to x */
+
+    /**
+     * Sets the frame for the ouput, needs to be cast appropriately.
+     * @param x Given frame for the output to go to
+     */
     public void setFrame(JFrame x){this.frame = x;}
-    /** setInputFileStub sets the string inputFileStub to x + "/input" */
+
+    /**
+     * Sets the input file stub, given a non full path, appends /input to the end, to give the file name starts with input.
+     * @param x Given stub, without /input at the end.
+     */
     public void setInputFileStub(String x){this.inputFileStub = x + "/input";}
-    /** setArgs sets the arraylist args to x */
+
+    /**
+     * Sets the arguments used to run the java code.
+     * @param x Given list of arguments for the code to run with.
+     */
     public void setArgs(ArrayList<String> x){this.args = x;}
-    /** setClassList sets the string ClassList to x */
+
+    /**
+     * Sets the list/single main class for the run.
+     * @param x Given main class for the current run.
+     */
     public void setClassList(String x){this.classList = x;}
-    /** setClassPath sets the string classPath to x */
+
+    /**
+     * Sets path to what directory you want to setup a /bin directory in. CHANGE THIS, ALWAYS CREATES A BIN DIRECTORY FOR CLASS FILES.
+     * @param x Given directory you want a /bin directory created in.
+     */
     public void setClassPath(String x){this.classPath = x + "/bin";} // You give it the src path
-    /** setStudentPath sets the string studentPath to x */
+
+    /**
+     * Sets path to what directory you want to setup a /projectFiles directory in. CHANGE THIS, ALWAYS CREATES A PROJECTFILES DIRECTORY FOR STUDENT FILES.
+     * @param x Given directory you want a /projectFiles directory created in.
+     */
     public void setStudentPath(String x){this.studentPath = x + "/projectFiles" ;} // You give it the src path
-    /** setStudentName sets student Name to x */
+
+    /**
+     * Sets the student name for the run
+     * @param x Given student name for the run.
+     */
     public void setStudentName(String x){this.studentName = x;}
-    /** setOutputFileName sets the string outputFileName to x */
+
+    /**
+     * Sets the output file name. THIS MIGHT NEED TO BE A DIRECTORY
+     * @param x Given output file name. THIS MIGHT NEED TO BE A DIRECTORY
+     */
     public void setOutputFileName(String x){this.outputFileName =x;}
-    /** setStudentHandle sets the string studentHandle to x */
+
+    /**
+     * Sets the student handle for the run
+     * @param x Given student handle for the run.
+     */
     public void setStudentHandle(String x){this.studentHandle = x;}
-    /** setClassName sets the string className to x */
+    /**
+     * Sets the class name for the run.
+     * @param x Given class name for the run.
+     */
     public void setClassName(String x){this.className = x;}
-    /** setConfigFileName sets the configFileName to x */
+
+    /* Unused methods.
     public void setConfigFileName(String x){this.configFileName = x;}
-    /** setSourcePath sets the sourcePath to x */
     public void setSourcePath(String x){this.sourcePath = x;}
-    /** setArgsFileName sets the string argsFileName to x */
     public void setArgsFileName(String x){this.argsFileName = x;}
-    /** setTestInputFileName sets the string testInputFileName to x */
     public void setTestInputFileName(String x){this.testInputFileName = x;}
-    /** setZipFile sets the string zipFile to x */
+    */
+
+    /**
+     * Sets the zip file for the run/compile. CURRENTLY CODED SO THAT IT ONLY LOOKS FOR A CERTAIN FILE. NOT DYNAMIC aTM>
+     * @param x Given zip file.
+     */
     public void setZipFile (String x){this.zipFile = /*x*/  "blank3.zip";} //TESTING PURPOSES, ISSUE.
 }//RunInfo

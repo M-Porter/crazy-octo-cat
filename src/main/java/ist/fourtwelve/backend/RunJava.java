@@ -16,40 +16,31 @@ import static java.lang.Thread.sleep;
  */
 public class RunJava
 {
-    /** name is the name of the student file */
+    /** Name of the student */
     private String name;
-    /** classPath is the location of the class on the computer */
+    /** Location where class files go to */
     private String classPath;
-    /** sourcePath is the location of the source file on the computer */
-    private String sourcePath;
-    /** studentPath is the location of the student files on the computer*/
-    private String studentPath;
-    /** inputFileStub is the directory where the student java files are found*/
+    /** Location of where the input files eventually go */
     private String inputFileStub;
-    /** inputFileName is the name of the directory where the student java files are found */
+    /** Name of the input file name, usually input#*/
     private String inputFileName;
-    /** outputFileName is the name of the output file */
+    /** Name of the output file.*/
     private String outputFileName;
-    /** success is an integer that has a value depending on whether or not the run succeeded */
+    /** Returned number if the program ran correctly or not. If 0, then ran correctly. otherwise not.*/
     private int success;
-    /** contains the run info for the class */
+    /** Container class related to both information for running and compiling java code */
     private RunInfo info;
-    /** what main classes will be run for the */
+    /** The main class the program is supposed to run*/
     private String classes;
-    //Debug/Output
-    /** compileJavaMethodToString is used in joining the thread to the javac process to force sequential execution*/
-    private String runJavaMethodToString;
+
     /**
-    Main Constructor, Set up of the initial info for running java, not compiling
-    @args info object which holds all the information relating to paths and such for the program to run.
-    //TODO: Cleanup name, number handle? Own object which handles this as per student or professor or class? RunInfo with this info as well.
+     * Only constructor, used to setup a few variables to have a local copy.
+     * @param info Given information related to both compiling and running java code.
      */
     public RunJava(RunInfo info)
     {
         name = info.getStudentName();
         classPath = info.getClassPath();
-        sourcePath = info.getSourcePath();
-        studentPath = info.getStudentPath();
         inputFileStub = info.getInputFileStub();
         outputFileName = info.getOutputFileName();
         success = 1;  // Outcome of compilation, success = 0
@@ -58,14 +49,12 @@ public class RunJava
     }
     /** 
      * The runJava method is the method that runs the whole process of reading in, checking the student files for errors, running and compiles those files, and writing to an output files
-     * @return {@link #success}    returns success which indicates whether or not the run was successful
+     * @return {@link #success} Returns success which indicates whether or not the run was successful
      */
     public int runJava()
     {
         try
         {
-            runJavaMethodToString = "";
-
 //    instantiate output file
             File outputFile = new File(outputFileName);
 
@@ -100,7 +89,7 @@ public class RunJava
                         arg.add(3, classes);
                         arg.add(4, info.getArgs().get(i));
                     }
-//        scan Stuff from the GUI, scanner inputs
+                   //scan Stuff from the GUI, scanner inputs
                     String testInputLine = inputs.get(i);
 
                     //Scanner inputs are handled here.
@@ -116,9 +105,9 @@ public class RunJava
                     }
                     writeTests.close();
                     File inputFile = new File(inputFileName);
+
                     //Scanner inputs are finished being handled.
 
-//        Runs the code we already built.
 
                     ProcessBuilder pb = new ProcessBuilder(arg);
 
@@ -130,11 +119,10 @@ public class RunJava
 
 
                     System.out.println("java process arguments: " + pb.command());
-//        start java process
-                    Process p = pb.start();
+                    Process p = pb.start(); //Run the code
 
                     success = p.waitFor();
-                    sleep(500); //Sleep used here to ensure the code had a generous amount of time to run.
+                    sleep(500); //Sleep used here to ensure the code had a generous amount of time to run. Not needed
                     assert pb.redirectInput() == Redirect.PIPE;
                     assert pb.redirectOutput().file() == outputFile;
                     assert p.getInputStream().read() == -1;

@@ -17,43 +17,44 @@ import java.util.Scanner;
  * @author Steve
  */
 public class Setup {
-    /** compiler object */
+    /** Compiler used to compile the java code */
     private Compiler compiler;
-    /** runner object */
+    /** RunJava object used to run the compiled java code */
     private RunJava runner;
-    /** runInfo object */
+    /** Object used to store information related to running and compiling the code */
     private RunInfo info;
-    /** project object */
+    /** Current project being used in the setup. Usually related to a single project sent to be setup/compiled/run */
     private Project project;
-    /** projects is an arraylist that contains the student projects */
+    /** Typical arraylist of all project sent from the GUI, main usage of this program goes through all projects and compiles/runs all code.*/
     private ArrayList<Project> projects;
-    /** frame is the window in which the GUI is located in */
+    /** Experimental frame used to show output */
     private JFrame frame;
-    /** output object is instaniated */
+    /** Experiemental output object which holds all ouput information in the runs*/
     private Output output = new Output();
     /** The run number that is currently going on */
     private int runNumber = 0;
     /** The current compiled/running project */
     private int projectNumber = 0;
-    //TODO: Change this method to something concrete and not using test methods.
     public Setup(){
 
     }
     /**
-     * Setup sets projects and info to their respective values
-     * @param projects  projects is the name of the project
+     * Used to specify multiple projects from the GUI
+     * @param projects Arraylist containing information to be run and how.
      */
     public Setup(ArrayList<Project> projects){
         this.projects = projects;
         info = new RunInfo();
     }
-    /** 
-    Runs the project without compiling
+
+    /**
+     * Used to specify only one project to be run from the GUI
+     * @param project A single project from the GUI, to save memory/space/time.
      */
     public Setup(Project project){this.project = project;}
-    
+
     /**
-     * method that is used to run the project and outputs whether or not the run was a success
+     * Runs a single project in the current setup object. Does not Compile. UNTESTED NOT FINISHED, OUT OF DATE.
      */
     public void runProject(){
         ArrayList<String> test = new ArrayList();
@@ -96,9 +97,10 @@ public class Setup {
             setGuiOutput();
         }
     }
+
     /**
-    * Compiles then runs the project
-    */
+     * Compiles then runs a single project in the current setup. UNTESTED NOT FINISHED, OUT OF DATE.
+     */
     public void compileRunProject(){
         ArrayList<String> test = new ArrayList();
         test.add("5");
@@ -153,8 +155,9 @@ public class Setup {
             setGuiOutput();
         }
     }
+
     /**
-     * Runs multiple projects without compiling.
+     * Runs multiple projects without compiling. UNTESTED NOT FINISHED, OUT OF DATE.
      */
     public void runProjects(){
         ArrayList<String> test = new ArrayList();
@@ -201,10 +204,12 @@ public class Setup {
             }
         }
     }
+
     /**
-     * Compiles then runs mulitiple projects
+     * Compiles then runs mulitiple projects. MAIN TESTED, Suggested use this even if running a single project.
      */
     public void compileRunProjects(){
+        //Temporary arraylist to simulate argument inputs, the runJava needs an arraylist of arguments to run properly. Needs to match/be more than the amount of inputs.
         ArrayList<String> test = new ArrayList();
         test.add("5");
         test.add("10");
@@ -255,7 +260,7 @@ public class Setup {
                     else {
                         y = false;
                     }
-                    System.out.println("Run fail (false) or not (true) " + y);
+                    System.out.println("Compile fail (false) or not (true) " + y);
                     output.setDidCompile(y);
                     projects.get(i).reportCompileSuccess(y); //Untested
                 }
@@ -282,7 +287,7 @@ public class Setup {
         }
     }
     /**
-     * determines what kind of gui output is used
+     * Sets the GUI Ouput, line by line, to the GUI.
      */
     private void setGuiOutput(){
         TestProjectGenerationView x = (TestProjectGenerationView) frame;
@@ -301,11 +306,21 @@ public class Setup {
         output.setOutputString(output.getOutputString() + "Run Number " + runNumber + " Project Numeber " + projectNumber + "\n ------------------------- \n" + tempString);
         x.setOutputArea(output.getOutputString());
     }
-    /** setOutput sets the object output to x */
+
+    /**
+     *  Sets the output object for the setup
+     * @param x Given output object for the output of setup to go to
+     */
     public void setOutput(Output x){this.output = x;}
-    /** setFrame sets the object frame to x */
+
+    /**
+     * Sets the frame for the output to go somewhere
+     * @param x Given Frame for the ouput of the compiling/running to go to.
+     */
     public void setFrame(JFrame x){frame = x;}
-    /** getOutput gets the object output 
+
+    /**
+     * Gets the output object of the current setup.
      * @return {@link #output} returns the output
      */
     public Output getOutput(){return this.output;}

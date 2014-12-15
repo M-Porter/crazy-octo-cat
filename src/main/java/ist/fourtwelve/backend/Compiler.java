@@ -11,23 +11,24 @@ import static java.lang.Thread.sleep;
  * @author mporter
  */
 public class Compiler {
-    /** Name is the name of the class that is to be compiled*/
+    /** Name of the student being compiled*/
     private String name;
-    /** {@link RunInfo#classPath}, is the location where the code is compiled to*/
+    /** Location of where the code is being compiled to*/
     private String classPath;
-    /** studentPath is the location where the source code is found*/
+    /** Location of where the student source code is found.*/
     private String studentPath;
-    /** outputFileName outputFileName is the location of the output file*/
+    /** Location of the ouput file*/
     private String outputFileName;
-    /** success success is the integer that holds a certain value depending on whether or not the class has complied succesfully*/
+    /** Whether or not the program compiled correctly*/
     private int success;
-    /** zipFile is the path of the zipfile that contains the student classes*/
+    /** Path of where the zip file is located*/
     private String zipFile;
-    /** info contains the run info for the class*/
+    /** Object containing information related to compiling and running java code.*/
     private RunInfo info;
+
     /**
-    Constructor, needs a RunInfo object to initialize this object.
-    @param info current information about the compile.
+     * Suggested constructor. Set up of the information to compiling code.
+     * @param info Given object of both compiling and run information.
      */
     public Compiler(RunInfo info) {
         name = info.getStudentName();
@@ -38,9 +39,10 @@ public class Compiler {
         this.info = info;
         success = 1;  // Outcome of compilation, success = 0
     }
+
     /**
-     * compileJava is the method that compiles the classes that are to be graded 
-     * @return {@link #success}  the method returns the variable success, which depending on the value of the variable indicates whether or not the compile was successful
+     * Compiles the java code based on the given information about the project.
+     * @return Integer related to compiling successfully or not
      */
     public int compileJava(){
         try {
